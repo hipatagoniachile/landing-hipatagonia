@@ -3,31 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HiPatagonia Chile | Productos Regionales</title>
+    <title>HiPatagonia Chile | Hub de Servicios Regionales</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
             --verde-bosque: #019b3c;
             --azul-petroleo: #004f7a;
             --verde-lima: #cdd61f;
-            --fondo-logo-exacto: #e7e3e0; /* Color exacto del fondo de tu JPG */
+            --fondo-logo-exacto: #e7e3e0;
             --blanco: #ffffff;
             --negro: #333333;
             --gris-claro: #f4f4f4;
+            --alerta: #e74c3c;
+            --exito: #2ecc71;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Open+Sans', sans-serif;
-            line-height: 1.6;
-            color: var(--negro);
-            background-color: var(--blanco);
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Open+Sans', sans-serif; line-height: 1.6; color: var(--negro); background-color: var(--blanco); }
 
         header {
             background-color: var(--fondo-logo-exacto);
@@ -38,109 +31,78 @@
             border-bottom: 1px solid rgba(0,0,0,0.05);
         }
 
-        .logo-container img {
-            height: 80px; /* Ajusta este tamaño según prefieras */
-            display: block;
+        .logo-container img { height: 70px; display: block; }
+
+        nav ul { display: flex; list-style: none; }
+        nav ul li { margin-left: 20px; }
+        nav ul li a { text-decoration: none; color: var(--azul-petroleo); font-weight: 600; font-size: 0.9rem; }
+
+        /* Sección de Estados de Conectividad */
+        .status-bar {
+            background: var(--azul-petroleo);
+            color: white;
+            padding: 2rem 5%;
+            text-align: center;
         }
 
-        nav ul {
-            display: flex;
-            list-style: none;
+        .status-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
         }
 
-        nav ul li {
-            margin-left: 20px;
+        .status-card {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--exito);
         }
 
-        nav ul li a {
-            text-decoration: none;
-            color: var(--azul-petroleo);
-            font-weight: 600;
-            transition: color 0.3s;
-        }
+        .status-card.alert { border-left-color: var(--alerta); }
 
-        nav ul li a:hover {
-            color: var(--verde-bosque);
-        }
+        .status-card h4 { font-size: 0.8rem; text-transform: uppercase; opacity: 0.8; margin-bottom: 0.5rem; }
+        .status-card p { font-weight: bold; font-size: 1.1rem; }
 
         .hero {
-            background: linear-gradient(rgba(0, 79, 122, 0.7), rgba(1, 155, 60, 0.7)), 
-                        url('https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background: linear-gradient(rgba(0, 79, 122, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=1350&q=80');
             background-size: cover;
             background-position: center;
-            height: 60vh;
+            height: 40vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            color: white;
             text-align: center;
-            color: var(--blanco);
-            padding: 0 20px;
         }
 
-        .hero h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--verde-lima);
-            color: var(--azul-petroleo);
-            padding: 12px 30px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: transform 0.3s, background-color 0.3s;
-        }
-
-        .btn:hover {
-            transform: scale(1.05);
-            background-color: var(--blanco);
-        }
-
-        .features {
+        .services-grid {
             padding: 4rem 5%;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            background-color: var(--gris-claro);
         }
 
-        .feature-card {
-            background: var(--blanco);
-            padding: 2rem;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        .service-item {
+            border: 1px solid #eee;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: 0.3s;
+            cursor: pointer;
         }
 
-        .feature-card h3 {
-            color: var(--azul-petroleo);
-            margin-bottom: 1rem;
-        }
+        .service-item:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
 
-        footer {
-            background-color: var(--azul-petroleo);
-            color: var(--blanco);
-            text-align: center;
-            padding: 2rem;
-            margin-top: 2rem;
-        }
+        .service-info { padding: 1.5rem; }
+        .service-info i { color: var(--azul-petroleo); font-size: 1.5rem; margin-bottom: 1rem; }
+
+        footer { background: var(--negro); color: white; padding: 3rem 5%; text-align: center; }
 
         @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                text-align: center;
-            }
-            nav ul {
-                margin-top: 1rem;
-            }
-            .hero h1 {
-                font-size: 2rem;
-            }
+            header { flex-direction: column; }
+            nav ul { margin-top: 1rem; }
         }
     </style>
 </head>
@@ -152,38 +114,68 @@
         </div>
         <nav>
             <ul>
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#productos">Productos</a></li>
-                <li><a href="#nosotros">Nosotros</a></li>
-                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#"><i class="fas fa-ship"></i> Barcazas</a></li>
+                <li><a href="#"><i class="fas fa-plane"></i> Vuelos</a></li>
+                <li><a href="#"><i class="fas fa-car"></i> Rent a Car</a></li>
+                <li><a href="#"><i class="fas fa-info-circle"></i> Info Útil</a></li>
             </ul>
         </nav>
     </header>
 
-    <section class="hero" id="inicio">
-        <h1>Lo mejor de nuestra Patagonia</h1>
-        <p>Productos regionales auténticos, directo a tu mesa.</p>
-        <br>
-        <a href="#contacto" class="btn">Próximamente</a>
+    <section class="status-bar">
+        <h3><i class="fas fa-broadcast-tower"></i> Estado de Conectividad en Tiempo Real</h3>
+        <div class="status-container">
+            <div class="status-card">
+                <h4>Primera Angostura</h4>
+                <p><i class="fas fa-check-circle"></i> Operativo</p>
+            </div>
+            <div class="status-card alert">
+                <h4>Paso Integración Austral</h4>
+                <p><i class="fas fa-clock"></i> Demora 2h</p>
+            </div>
+            <div class="status-card">
+                <h4>Vuelos PUQ</h4>
+                <p><i class="fas fa-plane-arrival"></i> En Horario</p>
+            </div>
+            <div class="status-card">
+                <h4>Ruta 9 Norte</h4>
+                <p><i class="fas fa-road"></i> Despejado</p>
+            </div>
+        </div>
     </section>
 
-    <section class="features">
-        <div class="feature-card">
-            <h3>Calidad Regional</h3>
-            <p>Seleccionamos cuidadosamente cada producto para garantizar la esencia de Magallanes.</p>
+    <section class="hero">
+        <h1>Tu Hub de la Patagonia</h1>
+        <p>Toda la información regional en un solo lugar.</p>
+    </section>
+
+    <section class="services-grid">
+        <div class="service-item">
+            <div class="service-info">
+                <i class="fas fa-car-side"></i>
+                <h3>Directorio Rent a Car</h3>
+                <p>Compara opciones y disponibilidad de vehículos en Punta Arenas y Natales.</p>
+            </div>
         </div>
-        <div class="feature-card">
-            <h3>Sustentabilidad</h3>
-            <p>Comprometidos con el entorno y los productores locales de nuestra zona.</p>
+        <div class="service-item">
+            <div class="service-info">
+                <i class="fas fa-bed"></i>
+                <h3>Hospedaje Regional</h3>
+                <p>Busca hostales y hoteles con información actualizada de contacto.</p>
+            </div>
         </div>
-        <div class="feature-card">
-            <h3>Despacho Regional</h3>
-            <p>Llegamos a todos los rincones de la región con eficiencia y cuidado.</p>
+        <div class="service-item">
+            <div class="service-info">
+                <i class="fas fa-map-marked-alt"></i>
+                <h3>Guía de Rutas</h3>
+                <p>Mapas, estados del camino y puntos de carga de combustible.</p>
+            </div>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 HiPatagonia Chile - Punta Arenas, Magallanes.</p>
+        <p><strong>HiPatagonia Chile</strong> - El portal de conectividad de Magallanes.</p>
+        <p style="font-size: 0.8rem; opacity: 0.6; margin-top: 1rem;">Punta Arenas, Chile - 2026</p>
     </footer>
 
 </body>
