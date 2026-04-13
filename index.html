@@ -1,145 +1,74 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HiPatagonia.cl | Centro de Mando</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <title>HiPatagonia.cl</title>
     <style>
-        /* Reseteo básico para evitar el pantallazo gris vacío */
-        * { box-sizing: border-box; }
-        
-        body {
+        /* Forzamos que el contenido ocupe espacio */
+        html, body {
             margin: 0;
             padding: 0;
-            font-family: 'Inter', sans-serif;
-            background-color: #e7e3e0; /* Tu color base */
-            color: #2d3436;
-            min-height: 100vh;
+            width: 100%;
+            background-color: #e7e3e0 !important;
+            display: block !important;
         }
 
-        /* Navbar estilo la imagen que subiste */
         nav {
             background-color: #2d3436;
-            padding: 15px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             color: white;
-        }
-
-        .logo { font-weight: 700; font-size: 1.2rem; }
-        .lang-btn { 
-            background: transparent; border: 1px solid white; color: white;
-            padding: 5px 15px; border-radius: 4px; cursor: pointer;
-        }
-
-        /* Contenedor principal - Aseguramos visibilidad */
-        .main-content {
-            max-width: 1100px;
-            margin: 30px auto;
-            padding: 0 20px;
-            display: block !important; /* Forzamos visibilidad */
-        }
-
-        .alert-bar {
-            background: #000;
-            color: #fff;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 25px;
-            font-size: 0.9rem;
-        }
-
-        /* Dashboard Grid */
-        .dashboard {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            background: white;
-            border-radius: 10px;
             padding: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-
-        .card-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
         }
 
-        .status-dot {
-            width: 12px; height: 12px; border-radius: 50%;
-            background: #2ecc71; /* Verde operativo */
+        /* El contenedor debe tener una altura mínima para que se vea */
+        .content-debug {
+            padding: 40px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
         }
 
-        .btn-wa {
+        .card-test {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            margin-top: 20px;
+            border: 2px solid #000; /* Borde negro para que se note */
+        }
+
+        h1 { color: #2d3436; }
+        .btn-check {
             background: #25D366;
             color: white;
+            padding: 15px;
             border: none;
-            width: 100%;
-            padding: 12px;
-            border-radius: 6px;
-            font-weight: 700;
-            margin-top: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-top: 20px;
             cursor: pointer;
         }
-
-        h2 { margin: 0 0 5px 0; font-size: 1.1rem; }
-        p { margin: 5px 0; font-size: 0.9rem; color: #636e72; }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">HiPatagonia.cl</div>
-        <button class="lang-btn">English</button>
+        <div style="font-weight: bold; font-size: 1.5rem;">HiPatagonia.cl</div>
+        <div><button style="color:white; background:none; border:1px solid white; padding:5px 10px;">English</button></div>
     </nav>
 
-    <div class="main-content">
+    <div class="content-debug">
+        <h1>¡Si ves esto, el sistema está funcionando!</h1>
+        <p>Estamos reconstruyendo el dashboard de control.</p>
         
-        <div class="alert-bar">
-            <strong>AVISO:</strong> Cruce Primera Angostura operando con normalidad. Viento 40km/h.
+        <div class="card-test">
+            <h2>Prueba de Conectividad</h2>
+            <p>Estado: <strong>OPERATIVO</strong></p>
+            <button class="btn-check">ESTO ES UN BOTÓN DE PRUEBA</button>
         </div>
-
-        <div class="dashboard">
-            <div class="card">
-                <div class="card-header">
-                    <h2>Primera Angostura</h2>
-                    <div class="status-dot"></div>
-                </div>
-                <p><strong>Estado:</strong> Abierto</p>
-                <p><strong>Espera:</strong> 15 - 20 min</p>
-                <button class="btn-wa">Recibir Alerta WhatsApp</button>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <h2>Paso Integración Austral</h2>
-                    <div class="status-dot"></div>
-                </div>
-                <p><strong>Estado:</strong> Abierto</p>
-                <p><strong>Tránsito:</strong> Fluido</p>
-                <button class="btn-wa">Recibir Alerta WhatsApp</button>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <h2>Río Don Guillermo</h2>
-                    <div class="status-dot" style="background:#f1c40f"></div>
-                </div>
-                <p><strong>Estado:</strong> Precaución</p>
-                <p><strong>Nieve:</strong> Uso de cadenas</p>
-                <button class="btn-wa">Recibir Alerta WhatsApp</button>
-            </div>
-        </div>
-
     </div>
 
 </body>
