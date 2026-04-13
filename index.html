@@ -3,15 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HiPatagonia Chile</title>
+    <title>HiPatagonia Chile | Explora el sur del mundo</title>
     <style>
-        body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; background-color: #f4f7f6; color: #1A3050; }
-        h1 { color: #00AEEF; }
+        :root {
+            --verde-bosque: #019b3c;
+            --azul-petroleo: #004f7a;
+            --verde-lima: #cdd61f;
+            --blanco: #ffffff;
+            --gris-claro: #f4f4f4;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--blanco);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            height: 60px; /* Ajusta según tu imagen */
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0, 79, 122, 0.7), rgba(0, 79, 122, 0.7)), 
+                        url('https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--blanco);
+            text-align: center;
+            padding: 0 5%;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+        }
+
+        .section {
+            padding: 4rem 10%;
+            text-align: center;
+        }
+
+        .quienes-somos {
+            background-color: var(--blanco);
+        }
+
+        .quienes-somos h2 {
+            color: var(--azul-petroleo);
+            font-size: 2rem;
+        }
+
+        .servicios {
+            background-color: var(--gris-claro);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--blanco);
+            padding: 2rem;
+            border-radius: 8px;
+            border-top: 5px solid var(--verde-bosque);
+        }
+
+        footer {
+            background-color: var(--azul-petroleo);
+            color: var(--blanco);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .cta-button {
+            background-color: var(--verde-lima);
+            color: #000;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 2rem;
+        }
     </style>
 </head>
 <body>
-    <h1>HiPatagonia Chile</h1>
-    <p>"Estamos preparando algo grande para Magallanes".</p>
-    <p><strong>Sitio en construcción</strong></p>
+
+    <header>
+        <img src="logo-montanas.png" alt="HiPatagonia Chile" class="logo">
+        <nav>
+            <strong>Contacto:</strong> contacto@hipatagoniachile.com
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>HiPatagonia Chile</h1>
+        <p>Explora el sur del mundo</p>
+        <a href="mailto:contacto@hipatagoniachile.com" class="cta-button">Contáctanos</a>
+    </section>
+
+    <section class="section quienes-somos">
+        <h2>Quiénes Somos</h2>
+        <p>Somos apasionados por nuestra tierra y su inmensidad. En <strong>HiPatagonia</strong> conectamos a viajeros y aventureros con los rincones más espectaculares del extremo sur, ofreciendo información estratégica y servicios con el sello de quienes habitamos y recorremos cada rincón de la Región de Magallanes y la Antártica Chilena.</p>
+    </section>
+
+    <section class="section servicios">
+        <div class="card">
+            <h3>Turismo Regional</h3>
+            <p>Rutas personalizadas y consejos locales para una aventura auténtica.</p>
+        </div>
+        <div class="card">
+            <h3>Productos Locales</h3>
+            <p>Lo mejor de nuestra zona disponible para el mundo.</p>
+        </div>
+        <div class="card">
+            <h3>Logística</h3>
+            <p>Apoyo experto para expediciones y viajes en terreno.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 HiPatagonia Chile - Magallanes, Chile</p>
+        <p>contacto@hipatagoniachile.com</p>
+    </footer>
+
 </body>
 </html>
