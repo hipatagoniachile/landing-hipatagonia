@@ -3,219 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HiPatagonia Chile - Hub de Conectividad</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    
+    <title>HiPatagonia.cl | Centro de Mando</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-color: #e7e3e0; /* Tu color de logo */
-            --card-bg: #ffffff;
-            --primary-text: #2d3436;
-            --secondary-text: #636e72;
-            --accent: #000000;
-            --success: #2ecc71;
-            --warning: #f1c40f;
-            --danger: #e74c3c;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--primary-text);
-            margin: 0; padding: 0;
-        }
-
-        /* HEADER & NAV */
-        header {
-            background: var(--accent);
-            color: white;
-            padding: 1rem 5%;
-            display: flex; justify-content: space-between; align-items: center;
-            position: sticky; top: 0; z-index: 1000;
-        }
-
-        .logo-area h1 { font-size: 1.2rem; margin: 0; letter-spacing: 1px; }
-        .nav-tools { display: flex; gap: 15px; }
+        /* Reseteo básico para evitar el pantallazo gris vacío */
+        * { box-sizing: border-box; }
         
-        .btn-lang { 
-            background: transparent; border: 1px solid #444; color: #ccc;
-            padding: 5px 10px; border-radius: 4px; font-size: 0.7rem; cursor: pointer;
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #e7e3e0; /* Tu color base */
+            color: #2d3436;
+            min-height: 100vh;
         }
 
-        /* LAYOUT */
-        .main-container {
-            max-width: 1200px; margin: 0 auto; padding: 20px;
+        /* Navbar estilo la imagen que subiste */
+        nav {
+            background-color: #2d3436;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
         }
 
-        /* BARRA DE ALERTA GLOBAL */
-        .global-alert {
-            background: var(--primary-text);
-            color: white; padding: 10px; border-radius: 8px;
-            margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+        .logo { font-weight: 700; font-size: 1.2rem; }
+        .lang-btn { 
+            background: transparent; border: 1px solid white; color: white;
+            padding: 5px 15px; border-radius: 4px; cursor: pointer;
+        }
+
+        /* Contenedor principal - Aseguramos visibilidad */
+        .main-content {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+            display: block !important; /* Forzamos visibilidad */
+        }
+
+        .alert-bar {
+            background: #000;
+            color: #fff;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 25px;
             font-size: 0.9rem;
         }
 
-        /* SECCIÓN WINDY (Donde pondrás tus widgets) */
-        .windy-section {
-            display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin-bottom: 30px;
+        /* Dashboard Grid */
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
         }
 
-        .windy-map {
-            background: #ccc; height: 400px; border-radius: 12px;
-            display: flex; align-items: center; justify-content: center;
-            overflow: hidden; border: 1px solid rgba(0,0,0,0.1);
-        }
-
-        /* DASHBOARD GRID */
-        .grid-title { 
-            font-size: 1.2rem; font-weight: 700; margin: 30px 0 15px; 
-            border-left: 4px solid var(--accent); padding-left: 15px;
-        }
-
-        .status-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;
-        }
-
-        /* CARDS */
         .card {
-            background: var(--card-bg); border-radius: 12px; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05); overflow: hidden;
-            display: flex; flex-direction: column;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
 
         .card-header {
-            padding: 15px; background: #fdfdfd; border-bottom: 1px solid #eee;
-            display: flex; justify-content: space-between; align-items: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
         }
 
-        .card-header h4 { margin: 0; font-size: 1rem; }
-        .tag { font-size: 0.6rem; text-transform: uppercase; color: var(--secondary-text); font-weight: 700; }
-
-        .card-body { padding: 15px; }
-        .data-item { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.9rem; }
-        .data-label { color: var(--secondary-text); }
-        .data-value { font-weight: 600; }
-
-        .status-dot { width: 10px; height: 10px; border-radius: 50%; }
-        .bg-success { background: var(--success); box-shadow: 0 0 8px var(--success); }
-        .bg-warning { background: var(--warning); box-shadow: 0 0 8px var(--warning); }
-        .bg-danger { background: var(--danger); box-shadow: 0 0 8px var(--danger); }
-
-        .card-footer { padding: 15px; background: #fafafa; border-top: 1px solid #eee; }
-        
-        .btn-whatsapp {
-            background: #25D366; color: white; border: none; width: 100%;
-            padding: 10px; border-radius: 6px; font-weight: 600; cursor: pointer;
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            transition: 0.3s;
+        .status-dot {
+            width: 12px; height: 12px; border-radius: 50%;
+            background: #2ecc71; /* Verde operativo */
         }
-        .btn-whatsapp:hover { background: #128C7E; }
 
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .windy-section { grid-template-columns: 1fr; }
-            .windy-map { height: 300px; }
+        .btn-wa {
+            background: #25D366;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: 700;
+            margin-top: 15px;
+            cursor: pointer;
         }
+
+        h2 { margin: 0 0 5px 0; font-size: 1.1rem; }
+        p { margin: 5px 0; font-size: 0.9rem; color: #636e72; }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo-area">
-            <h1>HiPatagonia<span>Chile</span></h1>
-        </div>
-        <div class="nav-tools">
-            <button class="btn-lang">ES/EN</button>
-            <button class="btn-lang">LOGIN</button>
-        </div>
-    </header>
+    <nav>
+        <div class="logo">HiPatagonia.cl</div>
+        <button class="lang-btn">English</button>
+    </nav>
 
-    <div class="main-container">
+    <div class="main-content">
         
-        <div class="global-alert">
-            <span>📢</span>
-            <marquee behavior="scroll" direction="left">
-                Vientos de hasta 90km/h en Primera Angostura. Posible suspensión de cruces. Paso Don Guillermo con uso obligatorio de cadenas.
-            </marquee>
+        <div class="alert-bar">
+            <strong>AVISO:</strong> Cruce Primera Angostura operando con normalidad. Viento 40km/h.
         </div>
 
-        <div class="windy-section">
-            <div class="windy-map">
-                <p style="color: #888;">[ Widget Windy: Mapa de Ráfagas ]</p>
-            </div>
-            <div class="windy-map">
-                <p style="color: #888;">[ Widget Windy: Pronóstico ]</p>
-            </div>
-        </div>
-
-        <div class="grid-title">Cruces de Barcazas</div>
-        <div class="status-grid">
+        <div class="dashboard">
             <div class="card">
                 <div class="card-header">
-                    <div><span class="tag">TABSA</span><h4>Primera Angostura</h4></div>
-                    <div class="status-dot bg-success"></div>
+                    <h2>Primera Angostura</h2>
+                    <div class="status-dot"></div>
                 </div>
-                <div class="card-body">
-                    <div class="data-item"><span class="data-label">Estado:</span><span class="data-value" style="color:var(--success)">Operativo</span></div>
-                    <div class="data-item"><span class="data-label">Espera:</span><span class="data-value">Mínima</span></div>
-                    <div class="data-item"><span class="data-label">Último zarpe:</span><span class="data-value">Hace 15 min</span></div>
-                </div>
-                <div class="card-footer">
-                    <button class="btn-whatsapp">🔔 Notificar al WhatsApp</button>
-                </div>
-            </div>
-            
-            <div class="card">
-                <div class="card-header">
-                    <div><span class="tag">TABSA</span><h4>Ferry Porvenir</h4></div>
-                    <div class="status-dot bg-success"></div>
-                </div>
-                <div class="card-body">
-                    <div class="data-item"><span class="data-label">Estado:</span><span class="data-value">Programado</span></div>
-                    <div class="data-item"><span class="data-label">Próximo Zarpe:</span><span class="data-value">09:00 AM</span></div>
-                </div>
-                <div class="card-footer">
-                    <button class="btn-whatsapp">🔔 Notificar al WhatsApp</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="grid-title">Pasos Fronterizos</div>
-        <div class="status-grid">
-            <div class="card">
-                <div class="card-header">
-                    <div><span class="tag">Ruta 3</span><h4>Integración Austral</h4></div>
-                    <div class="status-dot bg-success"></div>
-                </div>
-                <div class="card-body">
-                    <div class="data-item"><span class="data-label">Estado:</span><span class="data-value">Abierto</span></div>
-                    <div class="data-item"><span class="data-label">Atención:</span><span class="data-value">24 Horas</span></div>
-                </div>
-                <div class="card-footer">
-                    <button class="btn-whatsapp">🔔 Notificar al WhatsApp</button>
-                </div>
+                <p><strong>Estado:</strong> Abierto</p>
+                <p><strong>Espera:</strong> 15 - 20 min</p>
+                <button class="btn-wa">Recibir Alerta WhatsApp</button>
             </div>
 
             <div class="card">
                 <div class="card-header">
-                    <div><span class="tag">Paine - Calafate</span><h4>Río Don Guillermo</h4></div>
-                    <div class="status-dot bg-warning"></div>
+                    <h2>Paso Integración Austral</h2>
+                    <div class="status-dot"></div>
                 </div>
-                <div class="card-body">
-                    <div class="data-item"><span class="data-label">Estado:</span><span class="data-value" style="color:var(--warning)">Abierto con Precaución</span></div>
-                    <div class="data-item"><span class="data-label">Cadenas:</span><span class="data-value">Obligatorio</span></div>
+                <p><strong>Estado:</strong> Abierto</p>
+                <p><strong>Tránsito:</strong> Fluido</p>
+                <button class="btn-wa">Recibir Alerta WhatsApp</button>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Río Don Guillermo</h2>
+                    <div class="status-dot" style="background:#f1c40f"></div>
                 </div>
-                <div class="card-footer">
-                    <button class="btn-whatsapp">🔔 Notificar al WhatsApp</button>
-                </div>
+                <p><strong>Estado:</strong> Precaución</p>
+                <p><strong>Nieve:</strong> Uso de cadenas</p>
+                <button class="btn-wa">Recibir Alerta WhatsApp</button>
             </div>
         </div>
 
     </div>
-
-    <footer style="text-align: center; padding: 40px; color: #888; font-size: 0.8rem;">
-        &copy; 2024 HiPatagonia Chile - Hub de Datos en Vivo
-    </footer>
 
 </body>
 </html>
