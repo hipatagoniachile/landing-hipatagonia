@@ -3,135 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HiPatagonia Chile | Explora el sur del mundo</title>
+    <title>HiPatagonia Chile | Productos Regionales</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <style>
-/* 1. Actualiza esta variable en el :root */
-:root {
-    --verde-bosque: #019b3c;
-    --azul-petroleo: #004f7a;
-    --verde-lima: #cdd61f;
-    --fondo-logo-exacto: #e7e3e0; /* El color real del fondo de tu imagen */
-    --blanco: #ffffff;
-    --gris-claro: #f4f4f4;
-}
-
-/* 2. Ajusta el header para que use ese color */
-header {
-    background-color: var(--fondo-logo-exacto);
-    padding: 1rem 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: none; /* Quitamos la sombra para que la integración sea total */
-    border-bottom: 1px solid rgba(0,0,0,0.05); /* Un borde casi invisible para dar estructura */
-}
-
-/* 3. Opcional: Dale el mismo fondo a la sección Hero si quieres que todo fluya */
-.hero {
-    /* Mantenemos el degradado pero podemos usar el color base para que combine */
-    background: linear-gradient(rgba(231, 227, 224, 0.8), rgba(0, 79, 122, 0.9)), 
-                url('https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
-    background-size: cover;
-    background-position: center;
-}
-        .logo {
-            height: 60px; /* Ajusta según tu imagen */
+        :root {
+            --verde-bosque: #019b3c;
+            --azul-petroleo: #004f7a;
+            --verde-lima: #cdd61f;
+            --fondo-logo-exacto: #e7e3e0; /* Color exacto del fondo de tu JPG */
+            --blanco: #ffffff;
+            --negro: #333333;
+            --gris-claro: #f4f4f4;
         }
 
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .hero p {
-            font-size: 1.5rem;
-            max-width: 800px;
-        }
-
-        .section {
-            padding: 4rem 10%;
-            text-align: center;
-        }
-
-        .quienes-somos {
+        body {
+            font-family: 'Open+Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--negro);
             background-color: var(--blanco);
         }
 
-        .quienes-somos h2 {
-            color: var(--azul-petroleo);
-            font-size: 2rem;
+        header {
+            background-color: var(--fondo-logo-exacto);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
         }
 
-        .servicios {
-            background-color: var(--gris-claro);
+        .logo-container img {
+            height: 80px; /* Ajusta este tamaño según prefieras */
+            display: block;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--azul-petroleo);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--verde-bosque);
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0, 79, 122, 0.7), rgba(1, 155, 60, 0.7)), 
+                        url('https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--blanco);
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--verde-lima);
+            color: var(--azul-petroleo);
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            background-color: var(--blanco);
+        }
+
+        .features {
+            padding: 4rem 5%;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
+            background-color: var(--gris-claro);
         }
 
-        .card {
+        .feature-card {
             background: var(--blanco);
             padding: 2rem;
-            border-radius: 8px;
-            border-top: 5px solid var(--verde-bosque);
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .feature-card h3 {
+            color: var(--azul-petroleo);
+            margin-bottom: 1rem;
         }
 
         footer {
             background-color: var(--azul-petroleo);
             color: var(--blanco);
-            padding: 2rem;
             text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
         }
 
-        .cta-button {
-            background-color: var(--verde-lima);
-            color: #000;
-            padding: 1rem 2rem;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            margin-top: 2rem;
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+            nav ul {
+                margin-top: 1rem;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <img src="logo.jpg" alt="HiPatagonia Chile" class="logo">
+        <div class="logo-container">
+            <img src="logo.jpg" alt="HiPatagonia Chile">
+        </div>
         <nav>
-            <strong>Contacto:</strong> contacto@hipatagoniachile.com
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#productos">Productos</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
         </nav>
     </header>
 
-    <section class="hero">
-        <h1>HiPatagonia Chile</h1>
-        <p>Explora el sur del mundo</p>
-        <a href="mailto:contacto@hipatagoniachile.com" class="cta-button">Contáctanos</a>
+    <section class="hero" id="inicio">
+        <h1>Lo mejor de nuestra Patagonia</h1>
+        <p>Productos regionales auténticos, directo a tu mesa.</p>
+        <br>
+        <a href="#contacto" class="btn">Próximamente</a>
     </section>
 
-    <section class="section quienes-somos">
-        <h2>Quiénes Somos</h2>
-        <p>Somos apasionados por nuestra tierra y su inmensidad. En <strong>HiPatagonia</strong> conectamos a viajeros y aventureros con los rincones más espectaculares del extremo sur, ofreciendo información estratégica y servicios con el sello de quienes habitamos y recorremos cada rincón de la Región de Magallanes y la Antártica Chilena.</p>
-    </section>
-
-    <section class="section servicios">
-        <div class="card">
-            <h3>Turismo Regional</h3>
-            <p>Rutas personalizadas y consejos locales para una aventura auténtica.</p>
+    <section class="features">
+        <div class="feature-card">
+            <h3>Calidad Regional</h3>
+            <p>Seleccionamos cuidadosamente cada producto para garantizar la esencia de Magallanes.</p>
         </div>
-        <div class="card">
-            <h3>Productos Locales</h3>
-            <p>Lo mejor de nuestra zona disponible para el mundo.</p>
+        <div class="feature-card">
+            <h3>Sustentabilidad</h3>
+            <p>Comprometidos con el entorno y los productores locales de nuestra zona.</p>
         </div>
-        <div class="card">
-            <h3>Logística</h3>
-            <p>Apoyo experto para expediciones y viajes en terreno.</p>
+        <div class="feature-card">
+            <h3>Despacho Regional</h3>
+            <p>Llegamos a todos los rincones de la región con eficiencia y cuidado.</p>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 HiPatagonia Chile - Magallanes, Chile</p>
-        <p>contacto@hipatagoniachile.com</p>
+        <p>&copy; 2026 HiPatagonia Chile - Punta Arenas, Magallanes.</p>
     </footer>
 
 </body>
