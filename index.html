@@ -134,6 +134,72 @@
 
         h2 { margin: 0; font-size: 1.1rem; }
         h3 { margin: 25px 0 15px 0; border-left: 4px solid var(--oscuro); padding-left: 10px; }
+    /* Contenedor de la sección */
+.seccion-maritima {
+    margin-top: 30px;
+}
+
+/* Flexbox para las tarjetas marítimas */
+.dashboard-maritimo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 25px;
+}
+
+.card-maritima {
+    border-left: 6px solid #2d3436; /* Un borde lateral para diferenciar del resto */
+}
+
+.operador {
+    font-size: 0.75rem;
+    margin: 5px 0 0 0;
+    color: #888;
+}
+
+.status-indicator {
+    text-align: right;
+}
+
+.status-text {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: bold;
+    margin-top: 4px;
+}
+
+.data-group {
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.highlight {
+    color: #2ecc71;
+    font-weight: bold;
+}
+
+.info-alert {
+    background: #fff9db;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #f1c40f;
+    line-height: 1.2;
+}
+
+.link-external {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 0.8rem;
+    color: #2d3436;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.link-external:hover {
+    text-decoration: underline;
+}
     </style>
 </head>
 <body>
@@ -200,6 +266,87 @@
     <footer style="padding: 50px; text-align: center; color: #888; font-size: 0.8rem;">
         HiPatagonia Chile - Plataforma de Información en Tiempo Real
     </footer>
+<section class="seccion-maritima">
+    <h3>Cruces Marítimos (En Vivo)</h3>
+    <div class="dashboard-maritimo">
 
+        <div class="card card-maritima">
+            <div class="card-header">
+                <div class="header-main">
+                    <span class="tag">Cruce Estrecho</span>
+                    <h2>Primera Angostura</h2>
+                    <p class="operador">Operado por: <strong>TABSA</strong></p>
+                </div>
+                <div class="status-indicator">
+                    <div class="status-dot online"></div>
+                    <span class="status-text">OPERATIVO</span>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="data-group">
+                    <div class="data-item">
+                        <span class="label">Frecuencia:</span>
+                        <span class="value">Cada 30 - 45 min</span>
+                    </div>
+                    <div class="data-item">
+                        <span class="label">Viento Actual:</span>
+                        <span class="value" id="viento-angostura">42 km/h</span>
+                    </div>
+                    <div class="data-item">
+                        <span class="label">Tiempo de Espera:</span>
+                        <span class="value highlight">Baja (15 min)</span>
+                    </div>
+                </div>
+                
+                <div class="info-alert">
+                    <small>⚠️ Cruce sujeto a condiciones climáticas. Se recomienda precaución en rampa por marea alta.</small>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <button class="btn-wa">🔔 Alerta de Cierre WhatsApp</button>
+                <a href="https://www.tabsa.cl" target="_blank" class="link-external">Ver horarios oficiales →</a>
+            </div>
+        </div>
+
+        <div class="card card-maritima">
+            <div class="card-header">
+                <div class="header-main">
+                    <span class="tag">Conectividad TDF</span>
+                    <h2>Ferry Porvenir</h2>
+                    <p class="operador">Operado por: <strong>TABSA</strong></p>
+                </div>
+                <div class="status-indicator">
+                    <div class="status-dot warning"></div>
+                    <span class="status-text">PROGRAMADO</span>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="data-group">
+                    <div class="data-item">
+                        <span class="label">Próximo Zarpe:</span>
+                        <span class="value">09:00 AM (Desde PAQ)</span>
+                    </div>
+                    <div class="data-item">
+                        <span class="label">Disponibilidad:</span>
+                        <span class="value">Cupos limitados</span>
+                    </div>
+                    <div class="data-item">
+                        <span class="label">Estado Mar:</span>
+                        <span class="value">Marejadilla</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <button class="btn-wa">🔔 Alerta de Zarpe WhatsApp</button>
+                <a href="#" class="link-external">Comprar Tickets Online →</a>
+            </div>
+        </div>
+
+    </div>
+</section>
 </body>
 </html>
