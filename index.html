@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HiPatagonia Chile | Hub de Servicios Regionales</title>
+    <title>HiPatagonia Chile | Hub de Conectividad Regional</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -13,14 +13,15 @@
             --verde-lima: #cdd61f;
             --fondo-logo-exacto: #e7e3e0;
             --blanco: #ffffff;
-            --negro: #333333;
-            --gris-claro: #f4f4f4;
+            --negro: #1a1a1a;
+            --gris-claro: #f8f9fa;
             --alerta: #e74c3c;
             --exito: #2ecc71;
+            --warning: #f39c12;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Open+Sans', sans-serif; line-height: 1.6; color: var(--negro); background-color: var(--blanco); }
+        body { font-family: 'Open+Sans', sans-serif; background-color: var(--blanco); color: var(--negro); }
 
         header {
             background-color: var(--fondo-logo-exacto);
@@ -31,82 +32,85 @@
             border-bottom: 1px solid rgba(0,0,0,0.05);
         }
 
-        .logo-container img { height: 70px; display: block; }
+        .logo-container img { height: 65px; }
 
-        nav ul { display: flex; list-style: none; }
-        nav ul li { margin-left: 20px; }
-        nav ul li a { text-decoration: none; color: var(--azul-petroleo); font-weight: 600; font-size: 0.9rem; }
+        nav ul { display: flex; list-style: none; gap: 20px; }
+        nav ul li a { text-decoration: none; color: var(--azul-petroleo); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; }
 
-        /* Sección de Estados de Conectividad */
-        .status-bar {
-            background: var(--azul-petroleo);
-            color: white;
-            padding: 2rem 5%;
+        /* --- SECCIÓN DE ALERTAS --- */
+        .alert-subscribe {
+            background: var(--verde-lima);
+            padding: 10px;
             text-align: center;
+            font-weight: bold;
+            font-size: 0.9rem;
         }
+        .alert-subscribe a { color: var(--azul-petroleo); text-decoration: underline; margin-left: 10px; }
 
-        .status-container {
+        /* --- GRILLA DE CONECTIVIDAD --- */
+        .connectivity-section { padding: 3rem 5%; background: var(--gris-claro); }
+        .section-title { margin-bottom: 2rem; color: var(--azul-petroleo); display: flex; align-items: center; gap: 10px; }
+
+        .status-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
-            margin-top: 1.5rem;
         }
 
         .status-card {
-            background: rgba(255,255,255,0.1);
-            padding: 1rem;
-            border-radius: 8px;
-            border-left: 4px solid var(--exito);
-        }
-
-        .status-card.alert { border-left-color: var(--alerta); }
-
-        .status-card h4 { font-size: 0.8rem; text-transform: uppercase; opacity: 0.8; margin-bottom: 0.5rem; }
-        .status-card p { font-weight: bold; font-size: 1.1rem; }
-
-        .hero {
-            background: linear-gradient(rgba(0, 79, 122, 0.6), rgba(0, 0, 0, 0.6)), 
-                        url('https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=1350&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 40vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            text-align: center;
-        }
-
-        .services-grid {
-            padding: 4rem 5%;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .service-item {
-            border: 1px solid #eee;
+            background: white;
+            padding: 1.5rem;
             border-radius: 12px;
-            overflow: hidden;
-            transition: 0.3s;
-            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-top: 5px solid var(--exito);
         }
 
-        .service-item:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .status-card.warning { border-top-color: var(--warning); }
+        .status-card.danger { border-top-color: var(--alerta); }
 
-        .service-info { padding: 1.5rem; }
-        .service-info i { color: var(--azul-petroleo); font-size: 1.5rem; margin-bottom: 1rem; }
+        .status-card h4 { color: var(--azul-petroleo); margin-bottom: 0.5rem; font-family: 'Montserrat'; }
+        .status-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
+        
+        .badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: white;
+        }
+        .bg-exito { background: var(--exito); }
+        .bg-warning { background: var(--warning); }
+        .bg-danger { background: var(--alerta); }
 
-        footer { background: var(--negro); color: white; padding: 3rem 5%; text-align: center; }
+        .update-time { font-size: 0.7rem; color: #888; display: block; margin-top: 1rem; }
+
+        /* --- BOTÓN WHATSAPP --- */
+        .btn-whatsapp {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #25d366;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            text-decoration: none;
+            margin-top: 1rem;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
 
         @media (max-width: 768px) {
-            header { flex-direction: column; }
-            nav ul { margin-top: 1rem; }
+            header { flex-direction: column; gap: 1rem; }
+            .status-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
+
+    <div class="alert-subscribe">
+        <i class="fas fa-bell"></i> ¿Quieres recibir alertas de barcazas en tu celular? 
+        <a href="#">Suscríbete aquí a Alertas HiPatagonia</a>
+    </div>
 
     <header>
         <div class="logo-container">
@@ -114,68 +118,84 @@
         </div>
         <nav>
             <ul>
-                <li><a href="#"><i class="fas fa-ship"></i> Barcazas</a></li>
+                <li><a href="#"><i class="fas fa-ship"></i> Marítimo</a></li>
+                <li><a href="#"><i class="fas fa-road"></i> Rutas</a></li>
                 <li><a href="#"><i class="fas fa-plane"></i> Vuelos</a></li>
-                <li><a href="#"><i class="fas fa-car"></i> Rent a Car</a></li>
-                <li><a href="#"><i class="fas fa-info-circle"></i> Info Útil</a></li>
+                <li><a href="#"><i class="fas fa-concierge-bell"></i> Servicios</a></li>
             </ul>
         </nav>
     </header>
 
-    <section class="status-bar">
-        <h3><i class="fas fa-broadcast-tower"></i> Estado de Conectividad en Tiempo Real</h3>
-        <div class="status-container">
+    <section class="connectivity-section">
+        <h2 class="section-title"><i class="fas fa-anchor"></i> Cruces Marítimos y Barcazas</h2>
+        
+        <div class="status-grid">
             <div class="status-card">
-                <h4>Primera Angostura</h4>
-                <p><i class="fas fa-check-circle"></i> Operativo</p>
+                <div class="status-header">
+                    <h4>Punta Delgada - Espora</h4>
+                    <span class="badge bg-exito">OPERATIVO</span>
+                </div>
+                <p>Cruce Primera Angostura funcionando normal para todo vehículo.</p>
+                <span class="update-time">Actualizado: Hace 5 min</span>
             </div>
-            <div class="status-card alert">
-                <h4>Paso Integración Austral</h4>
-                <p><i class="fas fa-clock"></i> Demora 2h</p>
+
+            <div class="status-card warning">
+                <div class="status-header">
+                    <h4>Punta Arenas - Porvenir</h4>
+                    <span class="badge bg-warning">RESTRINGIDO</span>
+                </div>
+                <p>Cruce condicionado por ráfagas de viento de hasta 80 km/h.</p>
+                <span class="update-time">Actualizado: Hace 15 min</span>
             </div>
+
             <div class="status-card">
-                <h4>Vuelos PUQ</h4>
-                <p><i class="fas fa-plane-arrival"></i> En Horario</p>
+                <div class="status-header">
+                    <h4>Punta Arenas - Williams</h4>
+                    <span class="badge bg-exito">EN RUTA</span>
+                </div>
+                <p>Ferry navegando hacia Puerto Williams. Arribo estimado: Mañana 08:00.</p>
+                <span class="update-time">Actualizado: Hace 1 hora</span>
             </div>
+
             <div class="status-card">
-                <h4>Ruta 9 Norte</h4>
-                <p><i class="fas fa-road"></i> Despejado</p>
+                <div class="status-header">
+                    <h4>Río Verde - Isla Riesco</h4>
+                    <span class="badge bg-exito">OPERATIVO</span>
+                </div>
+                <p>Servicio normal de barcaza. Sin esperas reportadas.</p>
+                <span class="update-time">Actualizado: Hace 30 min</span>
             </div>
         </div>
+
+        <br><br>
+        <h2 class="section-title"><i class="fas fa-road"></i> Conectividad Terrestre</h2>
+        <div class="status-grid">
+            <div class="status-card danger">
+                <div class="status-header">
+                    <h4>Paso Integración Austral</h4>
+                    <span class="badge bg-danger">DEMORAS</span>
+                </div>
+                <p>Alta congestión en aduana. Tiempo estimado de espera: 120 minutos.</p>
+                <span class="update-time">Actualizado: Hace 10 min</span>
+            </div>
+            
+            <div class="status-card">
+                <div class="status-header">
+                    <h4>Ruta 9 Norte (PUQ-NAT)</h4>
+                    <span class="badge bg-exito">DESPEJADO</span>
+                </div>
+                <p>Calzada seca. Visibilidad buena. Conducir con precaución por fauna silvestre.</p>
+                <span class="update-time">Actualizado: Hace 20 min</span>
+            </div>
+        </div>
+
+        <a href="https://wa.me/tu_numero" class="btn-whatsapp">
+            <i class="fab fa-whatsapp"></i> &nbsp; ¿Tienes un reporte? Avísanos por WhatsApp
+        </a>
     </section>
 
-    <section class="hero">
-        <h1>Tu Hub de la Patagonia</h1>
-        <p>Toda la información regional en un solo lugar.</p>
-    </section>
-
-    <section class="services-grid">
-        <div class="service-item">
-            <div class="service-info">
-                <i class="fas fa-car-side"></i>
-                <h3>Directorio Rent a Car</h3>
-                <p>Compara opciones y disponibilidad de vehículos en Punta Arenas y Natales.</p>
-            </div>
-        </div>
-        <div class="service-item">
-            <div class="service-info">
-                <i class="fas fa-bed"></i>
-                <h3>Hospedaje Regional</h3>
-                <p>Busca hostales y hoteles con información actualizada de contacto.</p>
-            </div>
-        </div>
-        <div class="service-item">
-            <div class="service-info">
-                <i class="fas fa-map-marked-alt"></i>
-                <h3>Guía de Rutas</h3>
-                <p>Mapas, estados del camino y puntos de carga de combustible.</p>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <p><strong>HiPatagonia Chile</strong> - El portal de conectividad de Magallanes.</p>
-        <p style="font-size: 0.8rem; opacity: 0.6; margin-top: 1rem;">Punta Arenas, Chile - 2026</p>
+    <footer style="background: var(--azul-petroleo); color: white; padding: 2rem; text-align: center;">
+        <p><strong>HiPatagonia Chile</strong> - El Hub de información de la Región de Magallanes.</p>
     </footer>
 
 </body>
