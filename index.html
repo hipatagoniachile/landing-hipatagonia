@@ -5,50 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HiPatagonia Chile | Explora el sur del mundo</title>
     <style>
-/* 1. Actualiza las variables de color arriba del todo */
+/* 1. Actualiza esta variable en el :root */
 :root {
     --verde-bosque: #019b3c;
     --azul-petroleo: #004f7a;
     --verde-lima: #cdd61f;
-    --blanco-fondo-logo: #f2f2f2; /* Este es el color del fondo de tu JPG */
+    --fondo-logo-exacto: #e7e3e0; /* El color real del fondo de tu imagen */
     --blanco: #ffffff;
     --gris-claro: #f4f4f4;
 }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            color: #333;
-            line-height: 1.6;
-        }
-
-/* 2. Busca la regla del header y cámbiala así */
+/* 2. Ajusta el header para que use ese color */
 header {
-    background-color: var(--blanco-fondo-logo); /* Cambiamos de blanco puro al color del logo */
+    background-color: var(--fondo-logo-exacto);
     padding: 1rem 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Sombra más suave para que no choque */
+    box-shadow: none; /* Quitamos la sombra para que la integración sea total */
+    border-bottom: 1px solid rgba(0,0,0,0.05); /* Un borde casi invisible para dar estructura */
 }
 
+/* 3. Opcional: Dale el mismo fondo a la sección Hero si quieres que todo fluya */
+.hero {
+    /* Mantenemos el degradado pero podemos usar el color base para que combine */
+    background: linear-gradient(rgba(231, 227, 224, 0.8), rgba(0, 79, 122, 0.9)), 
+                url('https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+    background-size: cover;
+    background-position: center;
+}
         .logo {
             height: 60px; /* Ajusta según tu imagen */
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 79, 122, 0.7), rgba(0, 79, 122, 0.7)), 
-                        url('https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: var(--blanco);
-            text-align: center;
-            padding: 0 5%;
         }
 
         .hero h1 {
