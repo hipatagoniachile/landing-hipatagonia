@@ -1,4 +1,4 @@
-<!DOCTYPE html><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -41,7 +41,22 @@
 
         .alert-box { background: #fff3cd; color: #856404; padding: 1rem; border-radius: 8px; margin-bottom: 2rem; border: 1px solid #ffeeba; display: flex; align-items: center; gap: 15px; }
 
-        @media (max-width: 768px) { header { flex-direction: column; text-align: center; } .grid { grid-template-columns: 1fr; } }
+        /* Estilos para el Mapa */
+        .map-section { margin-top: 2rem; }
+        .map-container { 
+            width: 100%; 
+            height: 500px; 
+            border-radius: 12px; 
+            overflow: hidden; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 1px solid #ddd;
+        }
+
+        @media (max-width: 768px) { 
+            header { flex-direction: column; text-align: center; } 
+            .grid { grid-template-columns: 1fr; }
+            .map-container { height: 350px; }
+        }
     </style>
 </head>
 <body>
@@ -111,13 +126,31 @@
         </div>
     </div>
 
-    <div style="text-align: center;">
-        <p>¿Tienes un reporte? <a href="#" style="color: var(--azul-puq); font-weight: bold;">Avísanos por WhatsApp</a></p>
+    <div class="map-section">
+        <h3 style="color: var(--azul-puq); margin-bottom: 1rem; font-family: 'Montserrat';">
+            <i class="fas fa-wind"></i> Mapa de Viento y Temperatura en Vivo
+        </h3>
+        <div class="map-container">
+            <iframe 
+                width="100%" 
+                height="100%" 
+                src="https://embed.windy.com/embed2.html?lat=-52.563&lon=-71.016&detailLat=-53.150&detailLon=-70.917&width=650&height=450&zoom=7&level=surface&overlay=wind&product=ecmwf&menu=&message=true&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1" 
+                frameborder="0">
+            </iframe>
+        </div>
+        <p style="font-size: 0.8rem; color: #666; margin-top: 10px; text-align: center;">
+            * El mapa muestra las ráfagas de viento actuales en la Región de Magallanes. Puedes hacer zoom y moverte por el mapa.
+        </p>
+    </div>
+
+    <div style="text-align: center; margin-top: 3rem;">
+        <p>¿Tienes un reporte regional? <a href="#" style="color: var(--azul-puq); font-weight: bold;">Avísanos por WhatsApp</a></p>
     </div>
 </div>
 
 <footer style="background: var(--azul-puq); color: white; padding: 2rem; text-align: center; margin-top: 2rem;">
-    <p>HiPatagonia Chile - Tu Hub Regional</p>
+    <p>HiPatagonia Chile - Tu Hub de Información Regional</p>
+    <p style="font-size: 0.8rem; opacity: 0.7; margin-top: 0.5rem;">Punta Arenas • Puerto Natales • Tierra del Fuego</p>
 </footer>
 
 </body>
