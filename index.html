@@ -1,75 +1,205 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HiPatagonia.cl</title>
+    <title>HiPatagonia.cl | Centro de Control</title>
     <style>
-        /* Forzamos que el contenido ocupe espacio */
-        html, body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            background-color: #e7e3e0 !important;
-            display: block !important;
+        :root {
+            --fondo: #e7e3e0;
+            --oscuro: #2d3436;
+            --verde: #2ecc71;
+            --amarillo: #f1c40f;
+            --rojo: #e74c3c;
         }
 
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--fondo);
+            color: var(--oscuro);
+        }
+
+        /* Navbar */
         nav {
-            background-color: #2d3436;
-            color: white;
-            padding: 20px;
+            background-color: var(--oscuro);
+            padding: 15px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
-        /* El contenedor debe tener una altura mínima para que se vea */
-        .content-debug {
-            padding: 40px 20px;
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
+        /* Cintillo de Alerta */
+        .marquee-alert {
+            background: #000;
+            color: #fff;
+            padding: 10px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            font-size: 0.9rem;
         }
 
-        .card-test {
+        .marquee-content {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 20s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+
+        /* Contenedor Principal */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        /* Sección Windy */
+        .windy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .windy-placeholder {
+            background: #d1cdc9;
+            height: 300px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #b2bec3;
+            color: #636e72;
+        }
+
+        /* Grid de tarjetas */
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
             background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            margin-top: 20px;
-            border: 2px solid #000; /* Borde negro para que se note */
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            position: relative;
         }
 
-        h1 { color: #2d3436; }
-        .btn-check {
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .status-dot {
+            width: 12px; height: 12px; border-radius: 50%;
+        }
+
+        .online { background: var(--verde); box-shadow: 0 0 8px var(--verde); }
+        .warning { background: var(--amarillo); box-shadow: 0 0 8px var(--amarillo); }
+        .offline { background: var(--rojo); box-shadow: 0 0 8px var(--rojo); }
+
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .btn-wa {
             background: #25D366;
             color: white;
-            padding: 15px;
             border: none;
+            width: 100%;
+            padding: 12px;
             border-radius: 8px;
             font-weight: bold;
-            margin-top: 20px;
+            margin-top: 15px;
             cursor: pointer;
+            transition: 0.3s;
         }
+
+        .btn-wa:hover { opacity: 0.9; transform: scale(1.02); }
+
+        h2 { margin: 0; font-size: 1.1rem; }
+        h3 { margin: 25px 0 15px 0; border-left: 4px solid var(--oscuro); padding-left: 10px; }
     </style>
 </head>
 <body>
 
     <nav>
-        <div style="font-weight: bold; font-size: 1.5rem;">HiPatagonia.cl</div>
-        <div><button style="color:white; background:none; border:1px solid white; padding:5px 10px;">English</button></div>
+        <div style="font-weight: bold; font-size: 1.4rem;">HiPatagonia.cl</div>
+        <button style="background:none; border:1px solid white; color:white; padding:5px 10px; border-radius:4px;">English</button>
     </nav>
 
-    <div class="content-debug">
-        <h1>¡Si ves esto, el sistema está funcionando!</h1>
-        <p>Estamos reconstruyendo el dashboard de control.</p>
-        
-        <div class="card-test">
-            <h2>Prueba de Conectividad</h2>
-            <p>Estado: <strong>OPERATIVO</strong></p>
-            <button class="btn-check">ESTO ES UN BOTÓN DE PRUEBA</button>
+    <div class="marquee-alert">
+        <div class="marquee-content">
+            ⚠️ ALERTA: Vientos fuertes en Primera Angostura (85 km/h) • Paso Don Guillermo con escarcha, uso de cadenas obligatorio • Integración Austral operativo 24 hrs.
         </div>
     </div>
+
+    <div class="container">
+        
+        <h3>Situación Climática (Windy)</h3>
+        <div class="windy-grid">
+            <div class="windy-placeholder">
+                [ Mapa de Ráfagas ]
+            </div>
+            <div class="windy-placeholder">
+                [ Pronóstico por Horas ]
+            </div>
+        </div>
+
+        <h3>Conectividad y Cruces</h3>
+        <div class="dashboard">
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>Primera Angostura</h2>
+                    <div class="status-dot online"></div>
+                </div>
+                <div class="data-row"><span>Estado:</span><strong>Operativo</strong></div>
+                <div class="data-row"><span>Viento:</span><strong>45 km/h</strong></div>
+                <button class="btn-wa">🔔 Alerta WhatsApp</button>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Paso Int. Austral</h2>
+                    <div class="status-dot online"></div>
+                </div>
+                <div class="data-row"><span>Frontera:</span><strong>Abierta</strong></div>
+                <div class="data-row"><span>Demora:</span><strong>Baja</strong></div>
+                <button class="btn-wa">🔔 Alerta WhatsApp</button>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Río Don Guillermo</h2>
+                    <div class="status-dot warning"></div>
+                </div>
+                <div class="data-row"><span>Estado:</span><strong>Precaución</strong></div>
+                <div class="data-row"><span>Ruta:</span><strong>Nieve/Escarcha</strong></div>
+                <button class="btn-wa">🔔 Alerta WhatsApp</button>
+            </div>
+
+        </div>
+    </div>
+
+    <footer style="padding: 50px; text-align: center; color: #888; font-size: 0.8rem;">
+        HiPatagonia Chile - Plataforma de Información en Tiempo Real
+    </footer>
 
 </body>
 </html>
