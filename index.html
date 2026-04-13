@@ -1,202 +1,124 @@
-<!DOCTYPE html>
+<!DOCTYPE html><!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HiPatagonia Chile | Hub de Conectividad Regional</title>
+    <title>HiPatagonia | Portal de Conectividad Regional</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --verde-bosque: #019b3c;
-            --azul-petroleo: #004f7a;
-            --verde-lima: #cdd61f;
-            --fondo-logo-exacto: #e7e3e0;
-            --blanco: #ffffff;
-            --negro: #1a1a1a;
-            --gris-claro: #f8f9fa;
+            --azul-puq: #004f7a;
+            --verde-paine: #019b3c;
+            --crema-logo: #e7e3e0;
             --alerta: #e74c3c;
             --exito: #2ecc71;
-            --warning: #f39c12;
+            --naranja: #f39c12;
+            --blanco: #ffffff;
+            --gris-fondo: #f8f9fa;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Open+Sans', sans-serif; background-color: var(--blanco); color: var(--negro); }
+        body { font-family: 'Open+Sans', sans-serif; background-color: var(--blanco); }
 
-        header {
-            background-color: var(--fondo-logo-exacto);
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-        }
-
+        header { background-color: var(--crema-logo); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ddd; }
         .logo-container img { height: 65px; }
 
-        nav ul { display: flex; list-style: none; gap: 20px; }
-        nav ul li a { text-decoration: none; color: var(--azul-petroleo); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; }
+        .dashboard { padding: 2rem 5%; background: var(--gris-fondo); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
 
-        /* --- SECCIÓN DE ALERTAS --- */
-        .alert-subscribe {
-            background: var(--verde-lima);
-            padding: 10px;
-            text-align: center;
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
-        .alert-subscribe a { color: var(--azul-petroleo); text-decoration: underline; margin-left: 10px; }
-
-        /* --- GRILLA DE CONECTIVIDAD --- */
-        .connectivity-section { padding: 3rem 5%; background: var(--gris-claro); }
-        .section-title { margin-bottom: 2rem; color: var(--azul-petroleo); display: flex; align-items: center; gap: 10px; }
-
-        .status-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .status-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            border-top: 5px solid var(--exito);
-        }
-
-        .status-card.warning { border-top-color: var(--warning); }
-        .status-card.danger { border-top-color: var(--alerta); }
-
-        .status-card h4 { color: var(--azul-petroleo); margin-bottom: 0.5rem; font-family: 'Montserrat'; }
-        .status-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
+        .card { background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .card h3 { color: var(--azul-puq); margin-bottom: 1rem; border-bottom: 2px solid var(--crema-logo); padding-bottom: 0.5rem; font-family: 'Montserrat'; font-size: 1.1rem; }
         
-        .badge {
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            color: white;
-        }
-        .bg-exito { background: var(--exito); }
-        .bg-warning { background: var(--warning); }
-        .bg-danger { background: var(--alerta); }
+        .status-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; align-items: center; }
+        .status-row:last-child { border-bottom: none; }
+        .label { font-weight: 600; font-size: 0.9rem; }
+        
+        .val { font-weight: bold; padding: 2px 8px; border-radius: 4px; font-size: 0.85rem; }
+        .val.ok { color: var(--exito); }
+        .val.warn { color: var(--naranja); }
+        .val.danger { color: var(--alerta); }
 
-        .update-time { font-size: 0.7rem; color: #888; display: block; margin-top: 1rem; }
+        .alert-box { background: #fff3cd; color: #856404; padding: 1rem; border-radius: 8px; margin-bottom: 2rem; border: 1px solid #ffeeba; display: flex; align-items: center; gap: 15px; }
 
-        /* --- BOTÓN WHATSAPP --- */
-        .btn-whatsapp {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #25d366;
-            color: white;
-            padding: 10px;
-            border-radius: 8px;
-            text-decoration: none;
-            margin-top: 1rem;
-            font-weight: bold;
-            font-size: 0.8rem;
-        }
-
-        @media (max-width: 768px) {
-            header { flex-direction: column; gap: 1rem; }
-            .status-grid { grid-template-columns: 1fr; }
-        }
+        @media (max-width: 768px) { header { flex-direction: column; text-align: center; } .grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
-    <div class="alert-subscribe">
-        <i class="fas fa-bell"></i> ¿Quieres recibir alertas de barcazas en tu celular? 
-        <a href="#">Suscríbete aquí a Alertas HiPatagonia</a>
+<header>
+    <div class="logo-container">
+        <img src="logo.jpg" alt="HiPatagonia">
+    </div>
+    <p style="font-weight: bold; color: var(--azul-puq);">PORTAL DE SERVICIOS</p>
+</header>
+
+<div class="dashboard">
+    <div class="alert-box">
+        <i class="fas fa-exclamation-triangle fa-2x"></i>
+        <div>
+            <strong>Aviso Meteorológico:</strong> Ráfagas de viento sobre 90 km/h en sector Laguna Amarga y Lago Grey. Se recomienda precaución en vehículos altos.
+        </div>
     </div>
 
-    <header>
-        <div class="logo-container">
-            <img src="logo.jpg" alt="HiPatagonia Chile">
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#"><i class="fas fa-ship"></i> Marítimo</a></li>
-                <li><a href="#"><i class="fas fa-road"></i> Rutas</a></li>
-                <li><a href="#"><i class="fas fa-plane"></i> Vuelos</a></li>
-                <li><a href="#"><i class="fas fa-concierge-bell"></i> Servicios</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <section class="connectivity-section">
-        <h2 class="section-title"><i class="fas fa-anchor"></i> Cruces Marítimos y Barcazas</h2>
-        
-        <div class="status-grid">
-            <div class="status-card">
-                <div class="status-header">
-                    <h4>Punta Delgada - Espora</h4>
-                    <span class="badge bg-exito">OPERATIVO</span>
-                </div>
-                <p>Cruce Primera Angostura funcionando normal para todo vehículo.</p>
-                <span class="update-time">Actualizado: Hace 5 min</span>
+    <div class="grid">
+        <div class="card">
+            <h3><i class="fas fa-ship"></i> Cruces Marítimos</h3>
+            <div class="status-row">
+                <span class="label">Primera Angostura</span>
+                <span class="val ok">OPERATIVO</span>
             </div>
-
-            <div class="status-card warning">
-                <div class="status-header">
-                    <h4>Punta Arenas - Porvenir</h4>
-                    <span class="badge bg-warning">RESTRINGIDO</span>
-                </div>
-                <p>Cruce condicionado por ráfagas de viento de hasta 80 km/h.</p>
-                <span class="update-time">Actualizado: Hace 15 min</span>
+            <div class="status-row">
+                <span class="label">Punta Arenas - Porvenir</span>
+                <span class="val warn">POR CONFIRMAR (VIENTO)</span>
             </div>
-
-            <div class="status-card">
-                <div class="status-header">
-                    <h4>Punta Arenas - Williams</h4>
-                    <span class="badge bg-exito">EN RUTA</span>
-                </div>
-                <p>Ferry navegando hacia Puerto Williams. Arribo estimado: Mañana 08:00.</p>
-                <span class="update-time">Actualizado: Hace 1 hora</span>
-            </div>
-
-            <div class="status-card">
-                <div class="status-header">
-                    <h4>Río Verde - Isla Riesco</h4>
-                    <span class="badge bg-exito">OPERATIVO</span>
-                </div>
-                <p>Servicio normal de barcaza. Sin esperas reportadas.</p>
-                <span class="update-time">Actualizado: Hace 30 min</span>
+            <div class="status-row">
+                <span class="label">Río Verde - Isla Riesco</span>
+                <span class="val ok">OPERATIVO</span>
             </div>
         </div>
 
-        <br><br>
-        <h2 class="section-title"><i class="fas fa-road"></i> Conectividad Terrestre</h2>
-        <div class="status-grid">
-            <div class="status-card danger">
-                <div class="status-header">
-                    <h4>Paso Integración Austral</h4>
-                    <span class="badge bg-danger">DEMORAS</span>
-                </div>
-                <p>Alta congestión en aduana. Tiempo estimado de espera: 120 minutos.</p>
-                <span class="update-time">Actualizado: Hace 10 min</span>
+        <div class="card">
+            <h3><i class="fas fa-thermometer-half"></i> Clima en Tiempo Real</h3>
+            <div class="status-row">
+                <span class="label">Laguna Amarga (Paine)</span>
+                <span class="val">8°C | 55 km/h</span>
             </div>
-            
-            <div class="status-card">
-                <div class="status-header">
-                    <h4>Ruta 9 Norte (PUQ-NAT)</h4>
-                    <span class="badge bg-exito">DESPEJADO</span>
-                </div>
-                <p>Calzada seca. Visibilidad buena. Conducir con precaución por fauna silvestre.</p>
-                <span class="update-time">Actualizado: Hace 20 min</span>
+            <div class="status-row">
+                <span class="label">Lago Grey (Paine)</span>
+                <span class="val danger">4°C | 98 km/h</span>
+            </div>
+            <div class="status-row">
+                <span class="label">Puerto Natales</span>
+                <span class="val">10°C | 40 km/h</span>
             </div>
         </div>
 
-        <a href="https://wa.me/tu_numero" class="btn-whatsapp">
-            <i class="fab fa-whatsapp"></i> &nbsp; ¿Tienes un reporte? Avísanos por WhatsApp
-        </a>
-    </section>
+        <div class="card">
+            <h3><i class="fas fa-road"></i> Estado de Rutas</h3>
+            <div class="status-row">
+                <span class="label">PUQ - Natales (Ruta 9)</span>
+                <span class="val ok">DESPEJADO</span>
+            </div>
+            <div class="status-row">
+                <span class="label">Paso Integración Austral</span>
+                <span class="val warn">DEMORA 90 MIN</span>
+            </div>
+            <div class="status-row">
+                <span class="label">Ruta 3 (Arg) - San Sebastián</span>
+                <span class="val">TRANSITABLE</span>
+            </div>
+        </div>
+    </div>
 
-    <footer style="background: var(--azul-petroleo); color: white; padding: 2rem; text-align: center;">
-        <p><strong>HiPatagonia Chile</strong> - El Hub de información de la Región de Magallanes.</p>
-    </footer>
+    <div style="text-align: center;">
+        <p>¿Tienes un reporte? <a href="#" style="color: var(--azul-puq); font-weight: bold;">Avísanos por WhatsApp</a></p>
+    </div>
+</div>
+
+<footer style="background: var(--azul-puq); color: white; padding: 2rem; text-align: center; margin-top: 2rem;">
+    <p>HiPatagonia Chile - Tu Hub Regional</p>
+</footer>
 
 </body>
 </html>
