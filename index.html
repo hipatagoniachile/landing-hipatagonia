@@ -156,11 +156,26 @@
             text-transform: uppercase;
         }
 
-        .clima-grid-detallado {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 15px;
-        }
+        <div class="clima-grid-detallado">
+                
+                <div class="mini-widget">
+                    <span class="tag">Pronóstico: Estrecho</span>
+                    <h4>Primera Angostura</h4>
+                    <iframe src="https://www.windy.com/embed2.html?lat=-52.506&lon=-69.516&width=300&height=250&zoom=11&level=surface&overlay=wind&product=ecmwf&menu=&message=&marker=&calendar=now&pressure=&type=forecast&location=coordinates&detail=&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1" frameborder="0" style="width:100%; height:250px; border-radius: 8px;"></iframe>
+                </div>
+
+                <div class="mini-widget">
+                    <span class="tag">Zona Turismo</span>
+                    <h4>Pto. Natales / Paine</h4>
+                    <iframe src="https://www.windy.com/embed2.html?lat=-51.723&lon=-72.512&width=300&height=250&zoom=11&level=surface&overlay=wind&product=ecmwf&menu=&message=&marker=&calendar=now&pressure=&type=forecast&location=coordinates&detail=&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1" frameborder="0" style="width:100%; height:250px; border-radius: 8px;"></iframe>
+                </div>
+
+                <div class="mini-widget">
+                    <span class="tag">Eje Logístico TDF</span>
+                    <h4>San Sebastián</h4>
+                    <iframe src="https://www.windy.com/embed2.html?lat=-53.284&lon=-68.612&width=300&height=250&zoom=11&level=surface&overlay=wind&product=ecmwf&menu=&message=&marker=&calendar=now&pressure=&type=forecast&location=coordinates&detail=&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1" frameborder="0" style="width:100%; height:250px; border-radius: 8px;"></iframe>
+                </div>
+            </div>
 
         .mini-widget {
             background: white;
