@@ -134,6 +134,43 @@
         }
 
         footer { text-align: center; padding: 40px; color: #888; font-size: 0.8rem; }
+    .windy-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .windy-main-map {
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .tag-clima {
+            font-weight: bold;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+            color: var(--oscuro);
+            text-transform: uppercase;
+        }
+
+        .clima-grid-detallado {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .mini-widget {
+            background: white;
+            padding: 10px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .mini-widget h4 { margin: 5px 0; font-size: 0.9rem; }
     </style>
 </head>
 <body>
