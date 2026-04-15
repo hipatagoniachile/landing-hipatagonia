@@ -3,203 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HiPatagonia | Centro de Control Operativo</title>
+    <title>HiPatagonia | Control Operativo</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+    <script src="https://api.windy.com/assets/lib/libBoot.js"></script>
+
     <style>
         * { box-sizing: border-box; }
-        
-        body, html {
-            margin: 0; padding: 0; height: 100%;
-            font-family: 'Segoe UI', Roboto, sans-serif;
-            overflow: hidden; background-color: #e9ecef;
-        }
+        body, html { margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; background-color: #f1f5f9; overflow-x: hidden; }
 
-        /* HEADER AJUSTADO PARA QUE QUEPA TODO */
         header {
-            height: 55px; background: #1a2a3a;
-            display: flex; justify-content: space-between;
-            align-items: center; padding: 0 15px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2); z-index: 10;
+            position: absolute; top: 0; left: 0; width: 100%; height: 70px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 5%; z-index: 1000;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
         }
 
-        .logo { font-size: 18px; font-weight: 800; color: #ffffff; text-decoration: none; flex-shrink: 0; }
-
-        /* SEMÁFOROS COMPACTADOS PARA NOMBRES LARGOS */
-        .status-bar { display: flex; gap: 5px; flex-shrink: 1; overflow: hidden; }
-        .status-item {
-            display: flex; align-items: center; 
-            font-size: 8.5px; /* Fuente más pequeña para seguridad */
-            font-weight: bold; color: white; background: rgba(255,255,255,0.1);
-            padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.2);
-            white-space: nowrap;
+        .hero-banner {
+            width: 100%; height: 40vh; position: relative; display: flex; align-items: center; justify-content: center;
+            text-align: center; color: white; background: #0f172a;
         }
-        .dot { height: 7px; width: 7px; border-radius: 50%; margin-right: 5px; flex-shrink: 0; }
+        .hero-banner::before {
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('assets/hero_principal.jpg'); background-size: cover; background-position: center;
+            filter: brightness(0.4); z-index: 1;
+        }
+
+        /* --- CONTENEDOR DE HIERRO --- */
+        .wrapper-principal { 
+            display: block;
+            max-width: 1600px; 
+            margin: -50px auto 60px; 
+            padding: 0 40px; 
+            position: relative; 
+            z-index: 50; 
+        }
         
-        .pulse { animation: pulse-animation 2s infinite; }
-        @keyframes pulse-animation {
-            0% { box-shadow: 0 0 0 0px rgba(46, 204, 113, 0.7); }
-            100% { box-shadow: 0 0 0 6px rgba(46, 204, 113, 0); }
+        /* Layout con Grid forzado al 80/20 */
+        .layout-grid { 
+            display: grid !important;
+            grid-template-columns: 80% 20% !important; 
+            gap: 25px;
+            width: 100%;
         }
 
-        .green { background: #2ecc71; }
-        .yellow { background: #f1c40f; }
-        .red { background: #e74c3c; }
-
-        /* CONTENEDOR DASHBOARD */
-        .page-wrapper {
-            max-width: 1600px; margin: 0 auto;
-            height: calc(100vh - 55px); padding: 15px;
+        .seccion-mapa { width: 100%; }
+        #windy { 
+            width: 100% !important; 
+            height: 500px !important; 
+            background: #cbd5e1; 
+            border-radius: 20px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2); 
         }
 
-        .main-layout { display: flex; height: 100%; gap: 15px; }
-
-        .map-container { flex: 0 0 75%; display: flex; flex-direction: column; gap: 10px; }
-        
-        .alert-banner {
-            background: #fff3cd; color: #856404; padding: 8px 15px;
-            border-radius: 8px; border-left: 5px solid #ffeeba;
-            font-size: 12px; font-weight: 600;
+        /* Sidebar con ancho bloqueado */
+        .seccion-sidebar { width: 100%; }
+        .card-noticias { 
+            background: white; 
+            border-radius: 20px; 
+            padding: 20px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1); 
+            height: 500px; 
+            display: flex;
+            flex-direction: column;
         }
 
-        .map-card {
-            flex-grow: 1; background: white; border-radius: 12px;
-            overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            border: 1px solid rgba(0,0,0,0.05);
+        .video-box { width: 100%; height: 140px; border-radius: 12px; overflow: hidden; background: #000; margin-bottom: 15px; }
+        .video-box video { width: 100%; height: 100%; object-fit: cover; }
+
+        /* FOOTER RESTRUCTURADO */
+        .footer-principal { background-color: #0f172a; color: #94a3b8; padding: 60px 5% 40px; border-top: 6px solid #fbbf24; margin-top: 50px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 1400px; margin: 0 auto; }
+        .footer-col h4 { color: #ffffff; margin-bottom: 20px; font-size: 16px; text-transform: uppercase; }
+        .social-list { display: flex; gap: 15px; padding: 0; list-style: none; }
+        .social-list a { color: #fbbf24; font-size: 24px; text-decoration: none; }
+
+        .copyright-box { text-align: center; width: 100%; margin-top: 50px; padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 13px; }
+
+        @media (max-width: 1100px) {
+            .layout-grid { grid-template-columns: 1fr !important; }
+            .card-noticias { height: auto; }
         }
-
-        iframe { width: 100%; height: 100%; border: none; }
-
-        /* SIDEBAR */
-        .sidebar-card {
-            flex: 0 0 25%; background: white; border-radius: 12px;
-            display: flex; flex-direction: column; padding: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05); overflow-y: auto;
-        }
-
-        .sidebar-card h2 {
-            font-size: 12px; margin: 0 0 12px 0; color: #1a2a3a;
-            border-left: 3px solid #f1c40f; padding-left: 8px;
-            text-transform: uppercase;
-        }
-
-        .report-card {
-            background: #f8f9fa; border-radius: 8px; padding: 10px;
-            margin-bottom: 12px; border: 1px solid #eee;
-        }
-
-        .report-header { display: flex; justify-content: space-between; font-size: 9px; color: #999; margin-bottom: 5px; font-weight: bold; }
-        .report-body { font-size: 11px; line-height: 1.4; color: #333; }
-        .video-placeholder { width: 100%; height: 120px; background: #000; border-radius: 5px; margin-top: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px; }
-
-        .btn-premium {
-            background: #1a2a3a; color: #f1c40f; text-align: center;
-            padding: 12px; text-decoration: none; font-weight: bold;
-            border-radius: 6px; font-size: 11px; margin-top: auto;
-            border: 1px solid #f1c40f;
-        }
-
-        /* --- OPTIMIZACIÓN PARA CELULARES --- */
-@media (max-width: 800px) {
-    body, html {
-        overflow-y: auto; /* Permitimos scroll hacia abajo en el celular */
-    }
-
-    header {
-        height: auto;
-        flex-direction: column;
-        padding: 10px;
-        gap: 10px;
-    }
-
-    .status-bar {
-        display: grid;
-        grid-template-columns: 1fr 1fr; /* Ponemos los semáforos de 2 en 2 */
-        width: 100%;
-        gap: 5px;
-    }
-
-    .status-item {
-        justify-content: center;
-        font-size: 8px;
-    }
-
-    .page-wrapper {
-        height: auto; /* Que el contenedor crezca según el contenido */
-        padding: 10px;
-    }
-
-    .main-layout {
-        flex-direction: column; /* EL SECRETO: El sidebar se va abajo del mapa */
-        height: auto;
-    }
-
-    .map-container {
-        flex: none;
-        width: 100%;
-        height: 450px; /* Altura fija para el mapa en el celular */
-    }
-
-    .sidebar-card {
-        flex: none;
-        width: 100%;
-        height: auto; /* El sidebar crece hacia abajo */
-        margin-top: 10px;
-    }
-
-    .video-report {
-        max-height: 400px; /* Que el video no ocupe toda la pantalla */
-        object-fit: cover;
-    }
-}
     </style>
 </head>
 <body>
 
     <header>
-        <a href="#" class="logo">🏔️ HiPatagonia</a>
-        <div class="status-bar">
-            <div class="status-item"><span class="dot green pulse"></span> CRUCE ANGOSTURA</div>
-            <div class="status-item"><span class="dot green"></span> MONTE AYMOND</div>
-            <div class="status-item"><span class="dot yellow"></span> SAN SEBASTIÁN</div>
-            <div class="status-item"><span class="dot red"></span> PASO DOROTEA</div>
-        </div>
+        <a href="#" style="font-size:22px; color:white; font-weight:800; text-decoration:none;">🏔️ HiPatagonia</a>
+        <div style="color:white; font-size: 20px;">🇨🇱 🇺🇸 🇧🇷</div>
     </header>
 
-    <div class="page-wrapper">
-        <div class="main-layout">
+    <section class="hero-banner">
+        <div style="position:relative; z-index:2">
+            <h1 style="font-size: 36px; font-weight: 800; margin:0;">Centro de Control</h1>
+            <p>Monitoreo en tiempo real</p>
+        </div>
+    </section>
+
+    <div class="wrapper-principal">
+        <div class="layout-grid">
             
-            <div class="map-container">
-                <div class="alert-banner">
-                    ⚠️ <b>AVISO:</b> Sin demoras reportadas en Primera Angostura.
-                </div>
-                
-                <div class="map-card">
-                    <iframe src="https://embed.windy.com/embed2.html?lat=-52.843&lon=-70.049&zoom=8&level=surface&overlay=wind&product=ecmwf&menu=&message=&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=kt&metricTemp=%C2%B0C&radarRange=-1"></iframe>
-                </div>
+            <div class="seccion-mapa">
+                <div id="windy"></div>
             </div>
 
-            <div class="sidebar-card">
-                <h2>📢 Reportes en Vivo</h2>
-                
-                <div class="report-card">
-    <div class="report-header"><span>📹 REEL EXCLUSIVO</span><span>AHORA</span></div>
-    <div class="report-body"><b>URGENTE!!! Cerca de Natales:</b> Mira las condiciones actuales de nieve.</div>
-    
-    <video width="100%" style="border-radius: 8px; margin-top: 10px;" autoplay muted loop controls>
-        <source src="assets/video_nieve.mp4" type="video/mp4">
-        Tu navegador no soporta videos.
-    </video>
-</div>
-
-                <div class="report-card" style="border-left: 3px solid #e74c3c;">
-                    <div class="report-header"><span style="color: #e74c3c;">⚠️ ALERTA</span><span>HACE 1H</span></div>
-                    <div class="report-body"><b>Paso Dorotea:</b> Nieve en la ruta. Precaución.</div>
+            <div class="seccion-sidebar">
+                <div class="card-noticias">
+                    <h2 style="font-size:12px; border-left:4px solid #fbbf24; padding-left:10px; margin-bottom:15px; text-transform:uppercase;">📢 Reportes</h2>
+                    <div class="video-box">
+                        <video autoplay muted loop playsinline>
+                            <source src="assets/video_nieve.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div style="background:#f8fafc; padding:12px; border-radius:10px; border:1px solid #e2e8f0; font-size:11px;">
+                        <b>Monte Aymond:</b> Ruta habilitada. Precaución por escarcha.
+                    </div>
+                    <a href="#" style="background:#0f172a; color:#fbbf24; text-align:center; padding:12px; text-decoration:none; font-weight:800; border-radius:10px; font-size:11px; border:1px solid #fbbf24; margin-top:auto;">WHATSAPP PREMIUM</a>
                 </div>
-
-                <a href="https://wa.me/TU_NUMERO" class="btn-premium">👑 WHATSAPP PREMIUM</a>
             </div>
 
         </div>
     </div>
 
+    <footer class="footer-principal">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>🏔️ HiPatagonia</h4>
+                <p style="font-size:13px;">Información logística estratégica para Magallanes.</p>
+                <div class="social-list">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Contacto</h4>
+                <p style="font-size:13px;">📧 contacto@hipatagonia.cl</p>
+                <p style="font-size:13px;">📍 Punta Arenas, Chile</p>
+            </div>
+            <div class="footer-col">
+                <h4>Suscripción</h4>
+                <div style="display:flex; gap:5px;">
+                    <input type="email" placeholder="Email" style="padding:10px; border-radius:5px; border:none; width:100%;">
+                    <button style="background:#fbbf24; border:none; padding:10px; font-weight:bold; border-radius:5px; cursor:pointer;">OK</button>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-box">© 2026 HiPatagonia - Todos los derechos reservados.</div>
+    </footer>
+
+    <script>
+        // TRUCO: Esperar a que todo el DOM esté cargado para inicializar Windy
+        document.addEventListener("DOMContentLoaded", function() {
+            const options = {
+                key: 'PT2p4YboEwXw3rk94xqnV54URoJFCfI1', 
+                lat: -52.843,
+                lon: -70.049,
+                zoom: 8,
+            };
+
+            windyInit(options, windyAPI => {
+                const { map } = windyAPI;
+                L.marker([-52.463, -69.418]).addTo(map).bindPopup("<b>Primera Angostura</b>");
+                L.marker([-52.227, -69.492]).addTo(map).bindPopup("<b>Monte Aymond</b>");
+            });
+        });
+    </script>
 </body>
 </html>
