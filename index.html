@@ -3,335 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HiPatagonia.cl | Centro de Control Regional</title>
+    <title>HiPatagonia | Centro de Control Operativo</title>
     <style>
-        :root {
-            --fondo: #e7e3e0;
-            --oscuro: #2d3436;
-            --verde: #2ecc71;
-            --amarillo: #f1c40f;
-            --rojo: #e74c3c;
-            --blanco: #ffffff;
-            --wsp: #25D366;
-        }
-
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--fondo);
-            color: var(--oscuro);
-            line-height: 1.5;
-        }
-
-        /* Navbar */
-        nav {
-            background-color: var(--oscuro);
-            padding: 15px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: white;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .logo { font-weight: bold; font-size: 1.4rem; letter-spacing: 1px; }
-
-        /* Alerta Marquee */
-        .marquee-alert {
-            background: #000;
-            color: #fff;
-            padding: 10px 0;
-            overflow: hidden;
-            white-space: nowrap;
-            font-size: 0.9rem;
-        }
-
-        .marquee-content {
-            display: inline-block;
-            padding-left: 100%;
-            animation: marquee 30s linear infinite;
-        }
-
-        @keyframes marquee {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(-100%, 0); }
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 0 20px;
-        }
-
-        h3 { 
-            margin: 40px 0 20px 0; 
-            border-left: 5px solid var(--oscuro); 
-            padding-left: 15px;
-            text-transform: uppercase;
-            font-size: 1rem;
-            letter-spacing: 1px;
-        }
-
-        /* Sección Windy */
-        .windy-main-map {
-            background: var(--blanco);
-            padding: 15px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            margin-bottom: 30px;
-        }
-
-        .tag-clima {
-            font-weight: bold;
-            font-size: 0.75rem;
-            margin-bottom: 10px;
-            color: var(--oscuro);
-            text-transform: uppercase;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        /* Grid de Tarjetas */
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 20px;
-        }
-
-        /* Estilo Base Card */
-        .card {
-            background: var(--blanco);
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.2s;
-        }
-
-        .card:hover { transform: translateY(-3px); }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #f0f0f0;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-        }
-
-        .status-dot { width: 12px; height: 12px; border-radius: 50%; }
-        .online { background: var(--verde); box-shadow: 0 0 8px var(--verde); }
-        .warning { background: var(--amarillo); box-shadow: 0 0 8px var(--amarillo); }
-        .offline { background: var(--rojo); box-shadow: 0 0 8px var(--rojo); }
-
-        .tag { font-size: 0.65rem; color: #888; text-transform: uppercase; font-weight: bold; display: block; }
-        .data-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.9rem; }
+        * { box-sizing: border-box; }
         
-        .info-box {
-            background: #fff9db;
-            padding: 10px;
-            border-radius: 6px;
-            border: 1px solid var(--amarillo);
-            font-size: 0.8rem;
-            margin: 10px 0;
-            line-height: 1.3;
+        body, html {
+            margin: 0; padding: 0; height: 100%;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            overflow: hidden; background-color: #e9ecef;
         }
 
-        /* Botón WhatsApp */
-        .btn-wa {
-            background: var(--wsp);
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: auto;
-            text-decoration: none;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: 0.3s;
+        /* HEADER AJUSTADO PARA QUE QUEPA TODO */
+        header {
+            height: 55px; background: #1a2a3a;
+            display: flex; justify-content: space-between;
+            align-items: center; padding: 0 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2); z-index: 10;
         }
 
-        .btn-wa:hover { background: #1ebe57; }
+        .logo { font-size: 18px; font-weight: 800; color: #ffffff; text-decoration: none; flex-shrink: 0; }
 
-        .link-ext {
-            text-align: center;
-            display: block;
-            margin-top: 12px;
-            font-size: 0.75rem;
-            color: var(--secondary-text);
-            text-decoration: none;
-            font-weight: 600;
+        /* SEMÁFOROS COMPACTADOS PARA NOMBRES LARGOS */
+        .status-bar { display: flex; gap: 5px; flex-shrink: 1; overflow: hidden; }
+        .status-item {
+            display: flex; align-items: center; 
+            font-size: 8.5px; /* Fuente más pequeña para seguridad */
+            font-weight: bold; color: white; background: rgba(255,255,255,0.1);
+            padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.2);
+            white-space: nowrap;
+        }
+        .dot { height: 7px; width: 7px; border-radius: 50%; margin-right: 5px; flex-shrink: 0; }
+        
+        .pulse { animation: pulse-animation 2s infinite; }
+        @keyframes pulse-animation {
+            0% { box-shadow: 0 0 0 0px rgba(46, 204, 113, 0.7); }
+            100% { box-shadow: 0 0 0 6px rgba(46, 204, 113, 0); }
         }
 
-        footer { text-align: center; padding: 60px 20px; color: #888; font-size: 0.8rem; }
+        .green { background: #2ecc71; }
+        .yellow { background: #f1c40f; }
+        .red { background: #e74c3c; }
 
-        @media (max-width: 600px) {
-            .dashboard-grid { grid-template-columns: 1fr; }
+        /* CONTENEDOR DASHBOARD */
+        .page-wrapper {
+            max-width: 1600px; margin: 0 auto;
+            height: calc(100vh - 55px); padding: 15px;
+        }
+
+        .main-layout { display: flex; height: 100%; gap: 15px; }
+
+        .map-container { flex: 0 0 75%; display: flex; flex-direction: column; gap: 10px; }
+        
+        .alert-banner {
+            background: #fff3cd; color: #856404; padding: 8px 15px;
+            border-radius: 8px; border-left: 5px solid #ffeeba;
+            font-size: 12px; font-weight: 600;
+        }
+
+        .map-card {
+            flex-grow: 1; background: white; border-radius: 12px;
+            overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        iframe { width: 100%; height: 100%; border: none; }
+
+        /* SIDEBAR */
+        .sidebar-card {
+            flex: 0 0 25%; background: white; border-radius: 12px;
+            display: flex; flex-direction: column; padding: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); overflow-y: auto;
+        }
+
+        .sidebar-card h2 {
+            font-size: 12px; margin: 0 0 12px 0; color: #1a2a3a;
+            border-left: 3px solid #f1c40f; padding-left: 8px;
+            text-transform: uppercase;
+        }
+
+        .report-card {
+            background: #f8f9fa; border-radius: 8px; padding: 10px;
+            margin-bottom: 12px; border: 1px solid #eee;
+        }
+
+        .report-header { display: flex; justify-content: space-between; font-size: 9px; color: #999; margin-bottom: 5px; font-weight: bold; }
+        .report-body { font-size: 11px; line-height: 1.4; color: #333; }
+        .video-placeholder { width: 100%; height: 120px; background: #000; border-radius: 5px; margin-top: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px; }
+
+        .btn-premium {
+            background: #1a2a3a; color: #f1c40f; text-align: center;
+            padding: 12px; text-decoration: none; font-weight: bold;
+            border-radius: 6px; font-size: 11px; margin-top: auto;
+            border: 1px solid #f1c40f;
+        }
+
+        /* RESPONSIVO */
+        @media (max-width: 950px) {
+            .status-bar { display: none; } /* Si la pantalla es chica, ocultamos semáforos para no romper el logo */
         }
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="logo">HiPatagonia.cl</div>
-        <button style="background:none; border:1px solid white; color:white; padding:5px 12px; border-radius:4px; font-size: 0.8rem; cursor: pointer;">English</button>
-    </nav>
+    <header>
+        <a href="#" class="logo">🏔️ HiPatagonia</a>
+        <div class="status-bar">
+            <div class="status-item"><span class="dot green pulse"></span> CRUCE ANGOSTURA</div>
+            <div class="status-item"><span class="dot green"></span> MONTE AYMOND</div>
+            <div class="status-item"><span class="dot yellow"></span> SAN SEBASTIÁN</div>
+            <div class="status-item"><span class="dot red"></span> PASO DOROTEA</div>
+        </div>
+    </header>
 
-    <div class="marquee-alert">
-        <div class="marquee-content">
-            ⚠️ AVISO: Vientos de 85 km/h en el Estrecho. Cruce bajo observación • Paso Integración Austral Operativo • Cadenas obligatorias en Paso Don Guillermo por nieve acumulada.
+    <div class="page-wrapper">
+        <div class="main-layout">
+            
+            <div class="map-container">
+                <div class="alert-banner">
+                    ⚠️ <b>AVISO:</b> Sin demoras reportadas en Primera Angostura.
+                </div>
+                
+                <div class="map-card">
+                    <iframe src="https://embed.windy.com/embed2.html?lat=-52.843&lon=-70.049&zoom=8&level=surface&overlay=wind&product=ecmwf&menu=&message=&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=kt&metricTemp=%C2%B0C&radarRange=-1"></iframe>
+                </div>
+            </div>
+
+            <div class="sidebar-card">
+                <h2>📢 Reportes en Vivo</h2>
+                
+                <div class="report-card">
+    <div class="report-header"><span>📹 REEL EXCLUSIVO</span><span>AHORA</span></div>
+    <div class="report-body"><b>URGENTE!!! Cerca de Natales:</b> Mira las condiciones actuales de nieve.</div>
+    
+    <video width="100%" style="border-radius: 8px; margin-top: 10px;" autoplay muted loop controls>
+        <source src="assets/video nieve.mp4" type="video/mp4">
+        Tu navegador no soporta videos.
+    </video>
+</div>
+
+                <div class="report-card" style="border-left: 3px solid #e74c3c;">
+                    <div class="report-header"><span style="color: #e74c3c;">⚠️ ALERTA</span><span>HACE 1H</span></div>
+                    <div class="report-body"><b>Paso Dorotea:</b> Nieve en la ruta. Precaución.</div>
+                </div>
+
+                <a href="https://wa.me/TU_NUMERO" class="btn-premium">👑 WHATSAPP PREMIUM</a>
+            </div>
+
         </div>
     </div>
-
-    <div class="container">
-        
-        <h3>Condiciones Climáticas (Ráfagas)</h3>
-        <div class="windy-main-map">
-            <div class="tag-clima">
-                <span>📍 Mapa de Viento en Vivo - Región de Magallanes</span>
-                <span style="color: var(--verde);">● LIVE</span>
-            </div>
-            <iframe src="https://www.windy.com/embed2.html?lat=-53.150&lon=-70.900&zoom=7&level=surface&overlay=gust&product=ecmwf&menu=&message=true&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1" 
-                    frameborder="0" 
-                    style="width:100%; height:450px; border-radius:10px;"></iframe>
-        </div>
-
-        <h3>Pasos Fronterizos</h3>
-        <div class="dashboard-grid">
-            
-            <div class="card">
-                <div class="card-header">
-                    <div><span class="tag">Ruta 3 - Frontera</span><h2 style="margin:0; font-size:1.1rem;">Integración Austral</h2></div>
-                    <div class="status-dot online"></div>
-                </div>
-                <div class="data-row"><span>Estado:</span><strong>Abierto</strong></div>
-                <div class="data-row"><span>Atención:</span><span>24 Horas</span></div>
-                <a href="https://wa.me/56949149906?text=Hola%20HiPatagonia,%20necesito%20info%20en%20vivo%20del%20Paso%20Integracion%20Austral" 
-   target="_blank" 
-   class="btn-wa">
-   🔔 Alerta WhatsApp
-</a>
-            </div>
-
-            <div class="card" style="border-top: 4px solid var(--oscuro);">
-                <div class="card-header">
-                    <div><span class="tag">Tierra del Fuego</span><h2 style="margin:0; font-size:1.1rem;">San Sebastián</h2></div>
-                    <div class="status-dot online"></div>
-                </div>
-                <div class="data-row"><span>Frontera:</span><strong>Abierta</strong></div>
-                <div class="data-row"><span>Cruce:</span><span>Normal (Camiones)</span></div>
-                <a href="https://wa.me/56949149906?text=Hola%20HiPatagonia,%20necesito%20info%20en%20vivo%20del%20Paso%20Integracion%20Austral" 
-   target="_blank" 
-   class="btn-wa">
-   🔔 Alerta WhatsApp
-</a>            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <div><span class="tag">Cerro Castillo</span><h2 style="margin:0; font-size:1.1rem;">Don Guillermo</h2></div>
-                    <div class="status-dot warning"></div>
-                </div>
-                <div class="data-row"><span>Estado:</span><strong>Precaución</strong></div>
-                <div class="data-row"><span>Ruta:</span><strong>Nieve/Escarcha</strong></div>
-                <a href="https://wa.me/56949149906?text=Hola%20HiPatagonia,%20necesito%20info%20en%20vivo%20del%20Paso%20Integracion%20Austral" 
-   target="_blank" 
-   class="btn-wa">
-   🔔 Alerta WhatsApp
-</a>            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <div><span class="tag">Puerto Natales</span><h2 style="margin:0; font-size:1.1rem;">Paso Dorotea</h2></div>
-                    <div class="status-dot online"></div>
-                </div>
-                <div class="data-row"><span>Estado:</span><strong>Abierto</strong></div>
-                <div class="data-row"><span>Flujo:</span><span>Buses y Autos</span></div>
-                <a href="https://wa.me/56949149906?text=Hola%20HiPatagonia,%20necesito%20info%20en%20vivo%20del%20Paso%20Integracion%20Austral" 
-   target="_blank" 
-   class="btn-wa">
-   🔔 Alerta WhatsApp
-</a>            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <div><span class="tag">Puerto Natales</span><h2 style="margin:0; font-size:1.1rem;">Casas Viejas</h2></div>
-                    <div class="status-dot online"></div>
-                </div>
-                <div class="data-row"><span>Estado:</span><strong>Abierto</strong></div>
-                <div class="data-row"><span>Tránsito:</span><span>Carga liviana</span></div>
-                <a href="https://wa.me/56949149906?text=Hola%20HiPatagonia,%20necesito%20info%20en%20vivo%20del%20Paso%20Integracion%20Austral" 
-   target="_blank" 
-   class="btn-wa">
-   🔔 Alerta WhatsApp
-</a>            </div>
-
-            <div class="card" style="opacity: 0.85; background-color: #f8f9fa;">
-                <div class="card-header">
-                    <div><span class="tag">Temporada (Nov-Abr)</span><h2 style="margin:0; font-size:1.1rem;">Paso Radman</h2></div>
-                    <div class="status-dot offline"></div>
-                </div>
-                <div class="data-row"><span>Estado:</span><strong>CERRADO</strong></div>
-                <div class="data-row"><span>Aviso:</span><span>Río Bellavista</span></div>
-                <a href="https://wa.me/56949149906?text=Hola%20HiPatagonia,%20necesito%20info%20en%20vivo%20del%20Paso%20Integracion%20Austral" 
-   target="_blank" 
-   class="btn-wa">
-   🔔 Alerta WhatsApp
-</a>            </div>
-
-        </div>
-
-        <h3>Cruces Marítimos (En Vivo)</h3>
-        <div class="dashboard-grid">
-            
-            <div class="card" style="border-left: 6px solid var(--oscuro);">
-                <div class="card-header">
-                    <div><span class="tag">Cruce Estrecho</span><h2 style="margin:0; font-size:1.2rem;">Primera Angostura</h2></div>
-                    <div class="status-dot online"></div>
-                </div>
-                <div class="data-row"><span>Operado por:</span><strong>TABSA</strong></div>
-                <div class="data-row"><span>Viento Actual:</span><strong>42 km/h</strong></div>
-                <div class="data-row"><span>Espera:</span><strong style="color:var(--verde)">Baja (15 min)</strong></div>
-                <div class="info-box">⚠️ Cruce operando. Sujeto a cambios por condiciones de viento.</div>
-                <a href="https://wa.me/56949149906?text=Hola%20HiPatagonia,%20necesito%20info%20en%20vivo%20del%20Paso%20Integracion%20Austral" 
-   target="_blank" 
-   class="btn-wa">
-   🔔 Alerta WhatsApp
-</a>
-                <a href="https://www.tabsa.cl" target="_blank" class="link-ext">Ver horarios oficiales →</a>
-            </div>
-
-            <div class="card" style="border-left: 6px solid var(--oscuro);">
-                <div class="card-header">
-                    <div><span class="tag">Conectividad TDF</span><h2 style="margin:0; font-size:1.2rem;">Ferry Porvenir</h2></div>
-                    <div class="status-dot warning"></div>
-                </div>
-                <div class="data-row"><span>Próximo Zarpe:</span><strong>09:00 AM</strong></div>
-                <div class="data-row"><span>Disponibilidad:</span><span>Vehículos con cupos</span></div>
-                <div class="data-row"><span>Estado Mar:</span><span>Marejadilla</span></div>
-                <a href="https://wa.me/56949149906?text=Hola%20HiPatagonia,%20necesito%20info%20en%20vivo%20del%20Paso%20Integracion%20Austral" 
-   target="_blank" 
-   class="btn-wa">
-   🔔 Alerta WhatsApp
-</a>
-                <a href="https://www.tabsa.cl" target="_blank" class="link-ext">Comprar Tickets Online →</a>
-            </div>
-
-        </div>
-
-    </div>
-
-    <footer>
-        <p><strong>HiPatagonia.cl</strong> - Hub de Conectividad en Tiempo Real</p>
-        <p style="font-size: 0.7rem;">Información referencial sujeta a cambios oficiales.</p>
-    </footer>
 
 </body>
 </html>
