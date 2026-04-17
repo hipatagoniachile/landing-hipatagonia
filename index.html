@@ -3,173 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HiPatagonia | Control Operativo</title>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
-    <script src="https://api.windy.com/assets/lib/libBoot.js"></script>
-
+    <title>HiPatagonia | Muy Pronto</title>
     <style>
         * { box-sizing: border-box; }
-        body, html { margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; background-color: #f1f5f9; overflow-x: hidden; }
-
-        header {
-            position: absolute; top: 0; left: 0; width: 100%; height: 70px;
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 0 5%; z-index: 1000;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
-        }
-
-        .hero-banner {
-            width: 100%; height: 40vh; position: relative; display: flex; align-items: center; justify-content: center;
-            text-align: center; color: white; background: #0f172a;
-        }
-        .hero-banner::before {
-            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('assets/hero_principal.jpg'); background-size: cover; background-position: center;
-            filter: brightness(0.4); z-index: 1;
-        }
-
-        /* --- CONTENEDOR DE HIERRO --- */
-        .wrapper-principal { 
-            display: block;
-            max-width: 1600px; 
-            margin: -50px auto 60px; 
-            padding: 0 40px; 
-            position: relative; 
-            z-index: 50; 
-        }
-        
-        /* Layout con Grid forzado al 80/20 */
-        .layout-grid { 
-            display: grid !important;
-            grid-template-columns: 80% 20% !important; 
-            gap: 25px;
-            width: 100%;
-        }
-
-        .seccion-mapa { width: 100%; }
-        #windy { 
-            width: 100% !important; 
-            height: 500px !important; 
-            background: #cbd5e1; 
-            border-radius: 20px; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2); 
-        }
-
-        /* Sidebar con ancho bloqueado */
-        .seccion-sidebar { width: 100%; }
-        .card-noticias { 
-            background: white; 
-            border-radius: 20px; 
-            padding: 20px; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1); 
-            height: 500px; 
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f172a; /* El azul oscuro de tu marca */
+            color: white;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
         }
 
-        .video-box { width: 100%; height: 140px; border-radius: 12px; overflow: hidden; background: #000; margin-bottom: 15px; }
-        .video-box video { width: 100%; height: 100%; object-fit: cover; }
+        .container {
+            padding: 20px;
+            max-width: 600px;
+        }
 
-        /* FOOTER RESTRUCTURADO */
-        .footer-principal { background-color: #0f172a; color: #94a3b8; padding: 60px 5% 40px; border-top: 6px solid #fbbf24; margin-top: 50px; }
-        .footer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 1400px; margin: 0 auto; }
-        .footer-col h4 { color: #ffffff; margin-bottom: 20px; font-size: 16px; text-transform: uppercase; }
-        .social-list { display: flex; gap: 15px; padding: 0; list-style: none; }
-        .social-list a { color: #fbbf24; font-size: 24px; text-decoration: none; }
+        .logo {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
 
-        .copyright-box { text-align: center; width: 100%; margin-top: 50px; padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 13px; }
+        .divider {
+            width: 50px;
+            height: 3px;
+            background-color: #fbbf24; /* El amarillo de acento */
+            margin: 20px auto;
+        }
 
-        @media (max-width: 1100px) {
-            .layout-grid { grid-template-columns: 1fr !important; }
-            .card-noticias { height: auto; }
+        h1 {
+            font-size: 24px;
+            font-weight: 300;
+            line-height: 1.6;
+            color: #94a3b8;
+        }
+
+        .highlight {
+            color: white;
+            font-weight: 600;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 30px;
+            font-size: 12px;
+            color: #475569;
+            letter-spacing: 1px;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <a href="#" style="font-size:22px; color:white; font-weight:800; text-decoration:none;">🏔️ HiPatagonia</a>
-        <div style="color:white; font-size: 20px;">🇨🇱 🇺🇸 🇧🇷</div>
-    </header>
-
-    <section class="hero-banner">
-        <div style="position:relative; z-index:2">
-            <h1 style="font-size: 36px; font-weight: 800; margin:0;">Centro de Control</h1>
-            <p>Monitoreo en tiempo real</p>
-        </div>
-    </section>
-
-    <div class="wrapper-principal">
-        <div class="layout-grid">
-            
-            <div class="seccion-mapa">
-                <div id="windy"></div>
-            </div>
-
-            <div class="seccion-sidebar">
-                <div class="card-noticias">
-                    <h2 style="font-size:12px; border-left:4px solid #fbbf24; padding-left:10px; margin-bottom:15px; text-transform:uppercase;">📢 Reportes</h2>
-                    <div class="video-box">
-                        <video autoplay muted loop playsinline>
-                            <source src="assets/video_nieve.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                    <div style="background:#f8fafc; padding:12px; border-radius:10px; border:1px solid #e2e8f0; font-size:11px;">
-                        <b>Monte Aymond:</b> Ruta habilitada. Precaución por escarcha.
-                    </div>
-                    <a href="#" style="background:#0f172a; color:#fbbf24; text-align:center; padding:12px; text-decoration:none; font-weight:800; border-radius:10px; font-size:11px; border:1px solid #fbbf24; margin-top:auto;">WHATSAPP PREMIUM</a>
-                </div>
-            </div>
-
-        </div>
+    <div class="container">
+        <div class="logo">🏔️ HIPATAGONIA</div>
+        <div class="divider"></div>
+        <h1>
+            Estamos preparando la plataforma definitiva para las <br>
+            <span class="highlight">Rutas y Viajes Patagónicos.</span>
+        </h1>
+        <p style="color: #64748b; margin-top: 30px; font-size: 14px;">
+            Nuestro centro de control operativo está en fase de configuración técnica.
+        </p>
     </div>
 
-    <footer class="footer-principal">
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h4>🏔️ HiPatagonia</h4>
-                <p style="font-size:13px;">Información logística estratégica para Magallanes.</p>
-                <div class="social-list">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-whatsapp"></i></a>
-                    <a href="#"><i class="fab fa-tiktok"></i></a>
-                </div>
-            </div>
-            <div class="footer-col">
-                <h4>Contacto</h4>
-                <p style="font-size:13px;">📧 contacto@hipatagonia.cl</p>
-                <p style="font-size:13px;">📍 Punta Arenas, Chile</p>
-            </div>
-            <div class="footer-col">
-                <h4>Suscripción</h4>
-                <div style="display:flex; gap:5px;">
-                    <input type="email" placeholder="Email" style="padding:10px; border-radius:5px; border:none; width:100%;">
-                    <button style="background:#fbbf24; border:none; padding:10px; font-weight:bold; border-radius:5px; cursor:pointer;">OK</button>
-                </div>
-            </div>
-        </div>
-        <div class="copyright-box">© 2026 HiPatagonia - Todos los derechos reservados.</div>
-    </footer>
+    <div class="footer">
+        © 2026 HIPATAGONIA - PUNTA ARENAS, CHILE
+    </div>
 
-    <script>
-        // TRUCO: Esperar a que todo el DOM esté cargado para inicializar Windy
-        document.addEventListener("DOMContentLoaded", function() {
-            const options = {
-                key: 'PT2p4YboEwXw3rk94xqnV54URoJFCfI1', 
-                lat: -52.843,
-                lon: -70.049,
-                zoom: 8,
-            };
-
-            windyInit(options, windyAPI => {
-                const { map } = windyAPI;
-                L.marker([-52.463, -69.418]).addTo(map).bindPopup("<b>Primera Angostura</b>");
-                L.marker([-52.227, -69.492]).addTo(map).bindPopup("<b>Monte Aymond</b>");
-            });
-        });
-    </script>
 </body>
 </html>
